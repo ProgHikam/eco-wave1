@@ -14,6 +14,7 @@ function koneksi(): PDO {
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_TIMEOUT => 5,
     ];
     if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
         $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
@@ -25,11 +26,16 @@ function koneksi(): PDO {
     return $pdo;
 }
 
-// Otomatis impor file ecowave_db.sql jika database di hosting masih kosong
+// Otomatis impor file ecowave_db.sql satu kali jika database di hosting masih kosong
 function autoSetupDatabase(PDO $pdo): void {
     static $checked = false;
     if ($checked) return;
     $checked = true;
+
+    $flagFile = sys_get_temp_dir() . '/ecowave_db_ready.flag';
+    if (file_exists($flagFile)) {
+        return;
+    }
 
     try {
         // Cek apakah tabel utama 'locations' dan 'users' sudah ada
@@ -56,6 +62,7 @@ function autoSetupDatabase(PDO $pdo): void {
                 }
             }
         }
+        @file_put_contents($flagFile, 'ok');
     } catch (Throwable $e) {
         // Catat di log server Wasmer jika terjadi error tanpa mematikan web
         error_log('[Eco-Wave AutoSetup DB]: ' . $e->getMessage());
