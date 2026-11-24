@@ -4,7 +4,7 @@
 //                (2) berkas config/config.local.php (untuk lokal, JANGAN di-commit).
 $__cfg = [
     'host' => getenv('DB_HOST') ?: 'mysql-3ef4f218-hikamabdulsalam04-63af.f.aivencloud.com',
-    'name' => getenv('DB_NAME') ?: 'defaultdb',
+    'name' => getenv('DB_NAME') ?: 'ecowave_db',
     'user' => getenv('DB_USER') ?: 'avnadmin',
     'pass' => getenv('DB_PASS') !== false ? getenv('DB_PASS') : '',
     'port' => getenv('DB_PORT') ?: '18834',
