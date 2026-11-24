@@ -1,0 +1,6 @@
+{
+  "_catatan": "CONTOH FORMAT SAJA, angkanya bukan data penelitian. s = [daya, ekosistem, kedalaman, jarak infrastruktur], masing-masing 1-5. ex = 1 bila lokasi gugur (zona eksklusi).",
+  "lokasi": [
+    { "name": "Contoh Lokasi A", "region": "Lebak", "latitude": -7.05, "longitude": 106.20, "kw": 22.5, "s": [4, 3, 3, 3], "ex": 0 }
+  ]
+}

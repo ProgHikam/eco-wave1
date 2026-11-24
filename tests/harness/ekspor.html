@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><title>Harness ekspor</title>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<body style="background:#fff">
+<div><button id="p">PNG</button><button id="d">PDF</button></div><div id="peta" style="width:900px;height:500px;position:relative;overflow:hidden;background:#cde"><div class="leaflet-tile-pane"><canvas id="tl" width="256" height="256"></canvas></div><div class="leaflet-overlay-pane"><svg width="900" height="500" viewBox="0 0 900 500"><rect x="100" y="100" width="300" height="200" fill="#16a34a" fill-opacity=".5" stroke="#166534"/></svg></div><div class="leaflet-marker-pane"></div></div>
+
+<script src="../../assets/js/ecowave.js"></script><script src="../../assets/js/data.js"></script><script src="../../assets/js/ekspor.js"></script>
+<script>
+const R='../../';
+const fake={getContainer:()=>document.getElementById('peta'),getSize:()=>({x:900,y:500}),latLngToContainerPoint:()=>({x:450,y:250}),containerPointToLatLng:(p)=>({distanceTo:o=>(p.x||0)*90})};
+window.pronto=(async()=>{
+ const E=ECOWAVE,B=R+'assets/data/pltgl/';await Promise.all([E.muat(Object.keys(E.LAYER_META),B),E.muatRaster(B)]);
+ const P=Object.assign({},E.PARAM_DEFAULT,{dayaRef:E.rentangDayaAcuan(CMEMS.titik)});
+ window.hitung=(la,ln,musim,W,mask)=>{const h=E.hitungTitik({lat:la,lng:ln,cm:CMEMS,musim,W,mask,P,desa:DESA});return{halaman:'uji',lat:la,lng:ln,musim,gel:h.gel,pTahunan:h.gel.inter.p,sp:h.sp,m:h.m,en:h.en,P:h.P,EX:mask,map:fake}};
+ window.cur=hitung(-6.885,105.615,'jja',E.BOBOT_DEFAULT,true);
+ ECOWAVE_EKSPOR.pasang({png:document.getElementById('p'),pdf:document.getElementById('d'),ambil:()=>window.cur});
+})();
+</script>

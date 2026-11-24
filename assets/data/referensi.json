@@ -1,0 +1,152 @@
+{
+ "diperiksa": "2026-11",
+ "catatan": "Setiap entri diperiksa keberadaannya lewat pencarian katalog (penerbit/indeks) pada bulan di atas. Isi makalah tidak dikutip; kolom relevansi dan keterbatasan adalah penilaian tim, bukan pernyataan penulis. Pembaruan 2026-11-19: ditambahkan dua makalah pembanding bobot (Kaldellis & Chrysikos 2018; Feng dkk. 2026). Belum ada makalah yang kami temukan yang memberi rasio D:E:K:J secara langsung.",
+ "referensi": [
+  {
+   "id": "falcao2010",
+   "penulis": "Falcão, A. F. de O.",
+   "tahun": 2010,
+   "judul": "Wave energy utilization: A review of the technologies",
+   "sumber": "Renewable and Sustainable Energy Reviews 14(3): 899–918",
+   "doi": "10.1016/j.rser.2009.11.003",
+   "tautan": "https://doi.org/10.1016/j.rser.2009.11.003",
+   "indikator": [
+    "daya"
+   ],
+   "relevansi": "Ulasan karakterisasi sumber daya gelombang dan teknologi konversi; menjadi latar bagi pemakaian daya gelombang per meter muka gelombang (kW/m) sebagai indikator sumber daya.",
+   "batasan": "Ulasan teknologi umum, bukan studi lokasi Indonesia dan tidak menetapkan bobot atau ambang skor."
+  },
+  {
+   "id": "babarit2015",
+   "penulis": "Babarit, A.",
+   "tahun": 2015,
+   "judul": "A database of capture width ratio of wave energy converters",
+   "sumber": "Renewable Energy 80: 610–628",
+   "doi": "10.1016/j.renene.2015.02.049",
+   "tautan": "https://doi.org/10.1016/j.renene.2015.02.049",
+   "indikator": [
+    "daya"
+   ],
+   "relevansi": "Menghimpun capture width ratio (CWR) berbagai konverter gelombang; dipakai sebagai rujukan bahwa lebar tangkap dan efisiensi perangkat sangat bergantung jenis dan ukuran perangkat.",
+   "batasan": "Tidak memvalidasi angka bawaan situs (lebar tangkap 10 m, efisiensi 30 %). Angka itu asumsi tim dan dapat diubah di Kalkulator."
+  },
+  {
+   "id": "nobre2009",
+   "penulis": "Nobre, A.; Pacheco, M.; Jorge, R.; Lopes, M. F. P.; Gato, L. M. C.",
+   "tahun": 2009,
+   "judul": "Geo-spatial multi-criteria analysis for wave energy conversion system deployment",
+   "sumber": "Renewable Energy 34(1): 97–111",
+   "doi": "10.1016/j.renene.2008.03.002",
+   "tautan": "https://doi.org/10.1016/j.renene.2008.03.002",
+   "indikator": [
+    "daya",
+    "eko",
+    "ked",
+    "jar"
+   ],
+   "relevansi": "Studi paling dekat dengan pendekatan situs ini: analisis multikriteria berbasis SIG untuk menempatkan sistem energi gelombang. Faktor seleksinya mencakup kedalaman, jenis dasar laut, kabel bawah laut, kawasan lindung laut, lokasi pelabuhan, jaringan listrik, dan klimatologi gelombang. Mendukung pemilihan keempat indikator dan penggunaan eksklusi kawasan lindung.",
+   "batasan": "Kasus studinya pesisir barat daya Portugal. Bobot dan skor di sana tidak otomatis berlaku untuk pesisir selatan Banten, dan makalah ini tidak menjadi sumber rasio 40:30:15:15."
+  },
+  {
+   "id": "lyons2020",
+   "penulis": "Lyons, M. B. et al.",
+   "tahun": 2020,
+   "judul": "Mapping the world's coral reefs using a global multiscale earth observation framework",
+   "sumber": "Remote Sensing in Ecology and Conservation 6(4): 557–568",
+   "doi": "10.1002/rse2.157",
+   "tautan": "https://doi.org/10.1002/rse2.157",
+   "indikator": [
+    "eko"
+   ],
+   "relevansi": "Metode di balik peta terumbu karang Allen Coral Atlas, sumber lapisan karang dan reef pada situs ini; menjelaskan asal dan tingkat akurasi data ekosistem.",
+   "batasan": "Makalah melaporkan akurasi rata-rata sekitar 78 % pada peta yang diuji; peta tidak mencakup seluruh habitat (mis. mangrove) dan tidak menentukan jarak aman dari ekosistem."
+  },
+  {
+   "id": "amante2009",
+   "penulis": "Amante, C.; Eakins, B. W.",
+   "tahun": 2009,
+   "judul": "ETOPO1 1 Arc-Minute Global Relief Model: Procedures, Data Sources and Analysis",
+   "sumber": "NOAA Technical Memorandum NESDIS NGDC-24, NOAA National Geophysical Data Center",
+   "doi": "10.7289/V5C8276M",
+   "tautan": "https://doi.org/10.7289/V5C8276M",
+   "indikator": [
+    "ked"
+   ],
+   "relevansi": "Dokumentasi grid kedalaman/topografi global ETOPO1 (resolusi 1 menit busur) yang dibaca situs ini untuk indikator kedalaman.",
+   "batasan": "Sel sekitar 1,8 km sehingga tidak menangkap batimetri pantai yang rinci; kelas skor kedalaman (−50 s/d −20 m tertinggi) adalah keputusan tim, bukan hasil makalah ini."
+  },
+  {
+   "id": "malczewski2006",
+   "penulis": "Malczewski, J.",
+   "tahun": 2006,
+   "judul": "GIS-based multicriteria decision analysis: a survey of the literature",
+   "sumber": "International Journal of Geographical Information Science 20(7): 703–726",
+   "doi": "10.1080/13658810600661508",
+   "tautan": "https://doi.org/10.1080/13658810600661508",
+   "indikator": [
+    "bobot"
+   ],
+   "relevansi": "Tinjauan umum GIS-MCDA (survei 1990–2004); landasan bahwa kombinasi linear terbobot atas skor kriteria adalah praktik lazim dalam analisis kesesuaian lokasi.",
+   "batasan": "Tinjauan umum; tidak menyebut rasio bobot tertentu untuk energi gelombang."
+  },
+  {
+   "id": "saaty2008",
+   "penulis": "Saaty, T. L.",
+   "tahun": 2008,
+   "judul": "Decision making with the analytic hierarchy process",
+   "sumber": "International Journal of Services Sciences 1(1): 83–98",
+   "doi": "",
+   "tautan": "https://www.inderscience.com/offer.php?id=17590",
+   "indikator": [
+    "bobot"
+   ],
+   "relevansi": "Menjelaskan AHP: bobot diturunkan dari perbandingan berpasangan oleh pakar disertai rasio konsistensi. Dirujuk sebagai cara validasi bobot yang disarankan untuk situs ini.",
+   "batasan": "Situs ini belum menjalankan AHP. Rasio 40:30:15:15 ditetapkan tim, bukan hasil perbandingan berpasangan."
+  },
+  {
+   "id": "shepard1968",
+   "penulis": "Shepard, D.",
+   "tahun": 1968,
+   "judul": "A two-dimensional interpolation function for irregularly-spaced data",
+   "sumber": "Proceedings of the 1968 23rd ACM National Conference, hlm. 517–524",
+   "doi": "10.1145/800186.810616",
+   "tautan": "https://doi.org/10.1145/800186.810616",
+   "indikator": [
+    "daya"
+   ],
+   "relevansi": "Asal metode inverse distance weighting (IDW) yang dipakai untuk memperkirakan daya gelombang di titik yang diklik dari titik CMEMS.",
+   "batasan": "Hanya 4–5 titik acuan; hasil IDW antar titik adalah perkiraan, bukan keluaran model gelombang."
+  },
+  {
+   "id": "kaldellis2018",
+   "penulis": "Kaldellis, J. K.; Chrysikos, T.",
+   "tahun": 2018,
+   "judul": "Wave energy exploitation in the Ionian Sea Hellenic coasts: spatial planning of potential wave power stations",
+   "sumber": "International Journal of Sustainable Energy 38(4): 312–332",
+   "doi": "10.1080/14786451.2018.1539395",
+   "tautan": "https://doi.org/10.1080/14786451.2018.1539395",
+   "indikator": [
+    "daya",
+    "jarak"
+   ],
+   "relevansi": "MCDA berbasis SIG untuk lokasi PLTGL. Tabel bobotnya (sebagaimana tercantum pada cuplikan pencarian, teks lengkap belum kami baca): tinggi gelombang 65 %, jarak ke jaringan listrik 15 %, jarak ke pantai 10 %, jarak ke pelabuhan 10 %. Menjadi pembanding bahwa sumber daya gelombang diberi bobot dominan dan jarak infrastruktur lebih kecil.",
+   "batasan": "Tidak memuat faktor ekosistem maupun kedalaman sebagai faktor berbobot (keduanya sebagai pembatas/eksklusi), sehingga tidak bisa dipakai langsung menetapkan rasio D:E:K:J."
+  },
+  {
+   "id": "feng2026",
+   "penulis": "Feng, Z.; Wang, Q.; Xie, B.; Lv, D.; Hu, K.; Zheng, K.; Wang, J.; Yue, X.; Chen, J.",
+   "tahun": 2026,
+   "judul": "A Study on the Site Selection of Offshore Photovoltaics in the Northwest Pacific Coastal Waters Based on GIS and Fuzzy-AHP",
+   "sumber": "Applied Sciences 16(3): 1300",
+   "doi": "10.3390/app16031300",
+   "tautan": "https://doi.org/10.3390/app16031300",
+   "indikator": [
+    "daya",
+    "ked",
+    "eko"
+   ],
+   "relevansi": "Fuzzy-AHP dengan kriteria daya (bobot akhir 0,3498, peringkat 1) dan kedalaman air (0,1880, peringkat 2), serta kriteria jarak ke kawasan lindung laut. Angka dua bobot teratas terverifikasi pada teks makalah; tabel bobot lengkapnya tidak dapat kami baca.",
+   "batasan": "Objek studinya PLTS terapung lepas pantai, bukan PLTGL, sehingga hanya pembanding urutan kepentingan faktor. Bobot ekosistem dan jarak infrastruktur tidak kami verifikasi."
+  }
+ ]
+}

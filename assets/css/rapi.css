@@ -1,0 +1,97 @@
+/* rapi.css — perapian tata letak (tanpa mengubah desain/fitur). Dimuat paling akhir. */
+
+/* 1. Navbar: konten halaman tidak lagi tembus saat di-scroll */
+html body nav.nv#nv{background:rgba(var(--space-cadet-rgb),.72)!important;-webkit-backdrop-filter:blur(20px) saturate(1.25)!important;backdrop-filter:blur(20px) saturate(1.25)!important}
+html body nav.nv#nv .nv-links{background:rgba(var(--cream-rgb),.05)!important}
+@media(max-width:940px){
+  nav.nv#nv{background:rgba(var(--space-cadet-rgb),.9)!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+
+/* 2. Bilah chip/TOC: gulir horizontal rapi, tidak terpotong */
+.sub-nav,.info-toc{max-width:100%;box-sizing:border-box}
+@media(max-width:700px){
+  .info-toc{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .info-toc::-webkit-scrollbar{display:none}
+  .info-toc a{flex:0 0 auto}
+}
+
+/* 3. Terbaik: tabel bergulir di dalam kartu, tidak melebar */
+.table-wrap{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+.tb-tbl{min-width:760px;width:100%}
+.tb-tbl th,.tb-tbl td{white-space:nowrap;vertical-align:middle}
+.tb-tbl td:last-child{white-space:normal;min-width:280px;line-height:1.5}
+.tb-tbl .tb-sc{min-width:150px}
+
+/* 4. Celah: gaya yang sebelumnya belum ada */
+.sev-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:0 0 1.4rem}
+.sev-sum>*{padding:14px 12px;border:1px solid var(--o-line,rgba(var(--cream-rgb),.18));border-radius:14px;background:var(--o-card,rgba(var(--space-cadet-rgb),.5));text-align:center}
+.sev-sum b{display:block;font-size:1.7rem;line-height:1.1;color:var(--cream)}
+.sev-sum span{display:block;margin-top:4px;font-size:12px;color:var(--tan);letter-spacing:.04em}
+.sev-sum .k b{color:var(--tan)}
+details.celah{margin:0 0 10px;border:1px solid var(--o-line,rgba(var(--cream-rgb),.18));border-radius:14px;background:var(--o-card,rgba(var(--space-cadet-rgb),.5));overflow:hidden}
+details.celah>summary{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;cursor:pointer;list-style:none}
+details.celah>summary::-webkit-details-marker{display:none}
+details.celah>summary::after{content:"\25BE";margin-left:auto;color:var(--tan);transition:transform .2s}
+details.celah[open]>summary::after{transform:rotate(180deg)}
+details.celah .id{flex:0 0 auto;min-width:2.6em;padding:2px 8px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;background:rgba(var(--tan-rgb),.16);color:var(--tan)}
+details.celah .jdl{flex:1 1 auto;min-width:0;font-weight:700;color:var(--cream);line-height:1.45}
+details.celah .ringkas{display:block;margin-top:3px;font-size:13px;font-weight:400;color:var(--o-mut,var(--tan))}
+details.celah .stt{flex:0 0 auto;white-space:nowrap}
+details.celah .isi{display:grid;gap:10px;padding:2px 14px 14px;font-size:14px;line-height:1.65;color:var(--cream)}
+details.celah .isi>div b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--tan);margin-bottom:2px}
+details.celah .saran{padding:10px 12px;border-left:3px solid var(--tan);border-radius:0 10px 10px 0;background:rgba(var(--tan-rgb),.07)}
+@media(max-width:600px){
+  details.celah>summary{flex-wrap:wrap}
+  details.celah .stt{order:3}
+}
+
+/* 5. Bilah TOC/sub-nav yang menempel: lebih buram dan pekat agar teks di bawahnya tidak tembus */
+html body .sub-nav,html body .info-toc{background:rgba(var(--space-cadet-rgb),.88)!important;-webkit-backdrop-filter:blur(22px) saturate(1.25)!important;backdrop-filter:blur(22px) saturate(1.25)!important;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+
+/* 6. Kalkulator: filter biru/sepia lama pada ubin peta merusak warna semua mode peta dasar (Satelit, Jalan, OSM, dst.).
+      Halaman Peta sudah menonaktifkannya lewat .hud; di sini disamakan untuk peta Kalkulator. */
+#ekMap .leaflet-tile-pane,.leaflet-container .leaflet-tile-pane{filter:none!important}
+
+/* 7. Beranda (desktop): tata letak hero ala referensi.
+      Kiri-bawah: judul, deskripsi, tombol. Kanan-bawah: tiga kartu kaca sejajar. Kanan-tengah: pil info. Tengah dibiarkan lapang untuk video latar.
+      Hanya tata letak; isi, fitur, dan warna palet tidak berubah. Awalan panjang dipakai karena banyak aturan lama yang saling menimpa. */
+@media(min-width:1000px){
+  html body[data-page=beranda] header#beranda.hero.hero{min-height:100vh!important;height:auto;box-sizing:border-box;padding:0!important;display:flex!important;flex-direction:column}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-stage{flex:1 1 auto;position:static!important;width:100%;max-width:none!important;margin:0!important;padding:104px 56px 96px!important;box-sizing:border-box;align-items:flex-end!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy{position:static!important;width:min(560px,46vw)!important;max-width:560px!important;gap:0!important;justify-content:flex-end}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy .status-pill{order:0;margin:0 0 18px!important;align-self:flex-start;font-size:10.5px}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy h1{order:1;margin:0 0 14px!important;font-size:clamp(2rem,3.2vw,3rem)!important;line-height:1.08!important;letter-spacing:-.02em}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy .lead{order:2;margin:0 0 24px!important;max-width:420px;font-size:13.5px!important;line-height:1.65!important;opacity:.82}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy .btns{order:3;margin:0 0 14px!important;gap:10px!important;flex-wrap:nowrap!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy .btns a{white-space:nowrap}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy .hero-cari{order:4;margin:0!important;width:100%!important;max-width:420px!important;height:46px!important;font-size:12.5px!important}
+  /* pil info kanan-tengah */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-url{display:inline-flex!important;align-items:center;gap:8px;position:absolute!important;right:56px;bottom:230px;margin:0!important;padding:8px 16px;border-radius:999px;font-size:12px;letter-spacing:.02em;z-index:6;
+    background:rgba(var(--cream-rgb),.08);border:1px solid rgba(var(--cream-rgb),.22);color:var(--cream)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-url i{color:var(--tan)}
+  /* tiga kartu kaca sejajar di kanan-bawah */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail{display:flex!important;position:absolute!important;top:auto!important;left:auto!important;right:56px!important;bottom:96px!important;flex-direction:row!important;align-items:stretch!important;
+    gap:14px!important;width:auto!important;height:auto!important;transform:none!important;background:none!important;border:0!important;border-radius:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:none!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div{display:flex!important;flex-direction:column-reverse!important;justify-content:space-between!important;align-items:flex-start!important;gap:14px;
+    width:clamp(138px,12.5vw,176px);min-height:118px;padding:16px 18px!important;box-sizing:border-box;border-radius:22px!important;transform:none!important;text-align:left}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div b{font-size:clamp(1.7rem,2.6vw,2.4rem)!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div span{font-size:10.5px!important;letter-spacing:.1em;max-width:none!important}
+}
+@media(min-width:1000px) and (max-width:1180px){
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div{width:132px;min-height:104px}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-url{bottom:210px}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy{width:min(460px,44vw)!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-copy .btns{flex-wrap:wrap!important}
+}
+
+/* 8. Kartu hero berlekuk (pojok kanan-atas berlekuk dengan tombol panah bulat), mengikuti referensi.
+      Kaca kartu ada di ::before (yang dilubangi); tombol panah di ::after agar tidak ikut terpotong. Panah hanya hiasan (kartu belum berupa tautan). */
+@media(min-width:1000px){
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div{position:relative;isolation:isolate;background:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:none!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:22px;
+    background:linear-gradient(160deg,rgba(var(--cream-rgb),.16),rgba(var(--space-cadet-rgb),.42));border:1px solid rgba(var(--cream-rgb),.22);box-sizing:border-box;
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    -webkit-mask:radial-gradient(circle 27px at calc(100% - 23px) 23px,transparent 98%,#000 100%);mask:radial-gradient(circle 27px at calc(100% - 23px) 23px,transparent 98%,#000 100%)}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div::after{content:"\2197";position:absolute;top:6px;right:6px;width:34px;height:34px;border-radius:50%;
+    display:grid;place-items:center;font-size:15px;line-height:1;color:var(--cream);background:rgba(var(--cream-rgb),.14);border:1px solid rgba(var(--cream-rgb),.3)}
+}

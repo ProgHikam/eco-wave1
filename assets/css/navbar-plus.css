@@ -1,0 +1,110 @@
+/* =====================================================================
+   ECO-WAVE - Navbar: percantik tampilan SAJA (struktur HTML, nav.js, tautan, dropdown, menu ponsel tidak diubah).
+   Dimuat setelah navbar.css. Tetap tanpa backdrop-blur & tanpa oranye (sesuai revisi v5).
+   ===================================================================== */
+.nv{
+  background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.96),rgba(var(--space-cadet-rgb),.92));
+  border-bottom:1px solid rgba(var(--tan-rgb),.16);
+  box-shadow:0 6px 24px -10px rgba(var(--space-cadet-rgb),.65),inset 0 1px 0 rgba(var(--cream-rgb),.06);
+}
+/* garis aksen bergerak di tepi bawah */
+.nv::after,body[data-page=beranda].nav-solid .nv::after{
+  display:block;opacity:.9;height:2px;bottom:-1px;
+  background:linear-gradient(90deg,transparent,var(--tan),var(--tan),var(--tan),var(--tan),transparent);
+  background-size:200% 100%;animation:nvAlir 9s linear infinite;
+}
+body[data-page=beranda] .nv::after{display:block;opacity:0}
+body[data-page=beranda].nav-solid .nv{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.96),rgba(var(--space-cadet-rgb),.92))}
+@keyframes nvAlir{from{background-position:0 0}to{background-position:200% 0}}
+
+/* merek */
+.nv-brand svg{filter:drop-shadow(0 0 8px rgba(var(--tan-rgb),.45))}
+.nv-brand b{background:linear-gradient(90deg,var(--cream) 30%,var(--tan));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.nv-brand small{color:var(--tan)}
+
+/* kapsul tautan */
+.nv-links{background:rgba(var(--cream-rgb),.045);border:1px solid rgba(var(--tan-rgb),.18);box-shadow:inset 0 1px 0 rgba(var(--cream-rgb),.05)}
+.nv-links>a,.nv-dd>button{position:relative;color:var(--cream);transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.nv-links>a:hover,.nv-dd>button:hover,.nv-dd.open>button{background:rgba(var(--tan-rgb),.13);color:var(--cream);transform:translateY(-1px)}
+.nv-links>a.on,.nv-dd.on>button{
+  color:var(--cream);background:linear-gradient(135deg,rgba(var(--tan-rgb),.34),rgba(var(--tan-rgb),.30));
+  box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.55),0 6px 18px -6px rgba(var(--tan-rgb),.55);
+}
+.nv-links>a.on::after,.nv-dd.on>button::after{content:"";position:absolute;left:50%;bottom:3px;width:16px;height:3px;margin-left:-8px;border-radius:3px;background:var(--tan);box-shadow:0 0 8px var(--tan)}
+.nv-links>a.on i,.nv-dd.on>button i{color:var(--cream)}
+
+/* dropdown */
+.nv-menu{background:linear-gradient(180deg,var(--space-cadet),var(--space-cadet));border:1px solid rgba(var(--tan-rgb),.28);border-radius:16px;box-shadow:0 22px 50px rgba(var(--space-cadet-rgb),.55),0 0 0 1px rgba(var(--cream-rgb),.03)}
+.nv-menu::before{background:var(--space-cadet);border-color:rgba(var(--tan-rgb),.28)}
+.nv-menu a{transition:background .18s,transform .18s}
+.nv-menu a:hover{background:rgba(var(--tan-rgb),.13);transform:translateX(3px)}
+.nv-menu a>i{background:linear-gradient(135deg,rgba(var(--tan-rgb),.22),rgba(var(--tan-rgb),.2));color:var(--cream)}
+.nv-menu a.on{background:rgba(var(--tan-rgb),.17);box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.38)}
+
+/* kanan: status gelombang, alat, login */
+.nv-live{background:linear-gradient(135deg,rgba(var(--tan-rgb),.16),rgba(var(--tan-rgb),.08));border:1px solid rgba(var(--tan-rgb),.42);color:var(--cream)}
+.nv-live:hover{background:linear-gradient(135deg,rgba(var(--tan-rgb),.26),rgba(var(--tan-rgb),.16))}
+.nv-live i{background:var(--tan);animation:nv-denyut 2.2s infinite}
+.nv-live.off i{animation:none;background:var(--tan)}
+.nv-live.off{border-color:rgba(var(--cream-rgb),.18);background:rgba(var(--cream-rgb),.06)}
+.nv-tools{background:rgba(var(--cream-rgb),.06);border-color:rgba(var(--tan-rgb),.22)}
+.nv-tools .nv-cari:hover,.nv-tools .nv-aks:hover,.nv-tools .nv-aks[aria-expanded="true"]{background:rgba(var(--tan-rgb),.22);color:var(--cream)}
+.nv-btn{background:linear-gradient(135deg,var(--cream),var(--cream));color:var(--space-cadet);box-shadow:0 6px 16px -6px rgba(var(--tan-rgb),.55),inset 0 1px 0 var(--cream);transition:transform .2s,box-shadow .2s,background .2s}
+.nv-btn:hover{background:linear-gradient(135deg,var(--cream),var(--cream));transform:translateY(-1px);box-shadow:0 10px 20px -6px rgba(var(--tan-rgb),.7)}
+.nv-av{background:linear-gradient(135deg,var(--tan),var(--tan))}
+.nv-burger{background:rgba(var(--tan-rgb),.1);border-color:rgba(var(--tan-rgb),.3)}
+
+/* menu ponsel */
+@media(max-width:940px){
+  .nv-links{background:linear-gradient(180deg,var(--space-cadet),var(--space-cadet));border-bottom:2px solid rgba(var(--tan-rgb),.4);box-shadow:0 30px 60px rgba(var(--space-cadet-rgb),.6)}
+  .nv-links>a.on::after,.nv-dd.on>button::after{display:none}
+  .nv-links>a:hover,.nv-dd>button:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){.nv::after{animation:none!important}.nv-links>a:hover,.nv-btn:hover,.nv-menu a:hover{transform:none}}
+
+/* Kulit navbar seragam dengan tema Beranda di semua halaman. */
+.nv,body[data-page=beranda] .nv,body[data-page=beranda].nav-solid .nv{
+  background:rgba(var(--space-cadet-rgb),.84)!important;
+  border-bottom:1px solid rgba(var(--cream-rgb),.12)!important;
+  box-shadow:0 8px 24px rgba(var(--space-cadet-rgb),.3)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+.nv::after,body[data-page=beranda] .nv::after,body[data-page=beranda].nav-solid .nv::after{display:none!important}
+.nv-brand svg{filter:none}
+.nv-brand svg stop:first-child{stop-color:var(--tan)}
+.nv-brand svg stop:last-child{stop-color:var(--cream)}
+.nv-brand svg rect{stroke:rgba(var(--tan-rgb),.45)}
+.nv-brand svg path[fill="var(--tan)"]{fill:var(--tan)}
+.nv-links{background:rgba(var(--cream-rgb),.055)!important;border-color:rgba(var(--cream-rgb),.12)!important}
+.nv-links>a.on,.nv-dd.on>button{
+  background:rgba(var(--tan-rgb),.15)!important;
+  box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.4)!important;
+}
+.nv-links>a.on i,.nv-dd.on>button i,.nv-links>a:hover i,.nv-dd>button:hover i{color:var(--tan)!important}
+.nv-menu{background:rgba(var(--slate-gray-rgb),.97)!important;border-color:rgba(var(--cream-rgb),.16)!important}
+.nv-menu::before{background:var(--space-cadet)!important;border-color:rgba(var(--cream-rgb),.16)!important}
+.nv-menu a>i{color:var(--tan)!important;background:rgba(var(--tan-rgb),.12)!important}
+.nv-menu a.on{background:rgba(var(--tan-rgb),.12)!important}
+.nv-live i{background:var(--tan)!important;box-shadow:none!important;animation:none!important}
+.nv-burger{background:rgba(var(--cream-rgb),.08)!important;border-color:rgba(var(--cream-rgb),.18)!important}
+@media(max-width:940px){
+  .nv-links,body[data-page=beranda] .nv-links{background:rgba(var(--space-cadet-rgb),.97)!important;border-bottom:1px solid rgba(var(--cream-rgb),.14)!important}
+  .nv-menu{background:rgba(var(--cream-rgb),.05)!important}
+}
+
+.nv-links>a:hover,.nv-dd>button:hover,.nv-dd.open>button{background:rgba(var(--tan-rgb),.1)!important;color:var(--cream)!important}
+.nv-links>a.on,.nv-dd.on>button{color:var(--cream)!important;background:rgba(var(--tan-rgb),.15)!important;box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.4)!important}
+.nv-links>a.on::after,.nv-dd.on>button::after{background:var(--tan)!important;box-shadow:none!important}
+.nv-links>a,.nv-dd>button{color:var(--cream)}
+.nv-menu a span,.nv-brand small,.nv-jam,.nv-live em{color:var(--cream)}
+.nv-live{background:rgba(var(--cream-rgb),.06)!important;border-color:rgba(var(--cream-rgb),.14)!important;color:var(--cream)!important}
+.nv-live:hover{background:rgba(var(--cream-rgb),.12)!important}
+.nv-live:not(.off):not(.sim) i,.nv-live.sim i{background:var(--tan)!important;box-shadow:none!important;animation:none!important}
+.nv-live.off i{background:var(--tan)!important}
+.nv-tools{border-color:rgba(var(--cream-rgb),.16)!important}
+.nv-tools .nv-cari:hover,.nv-tools .nv-aks:hover,.nv-tools .nv-aks[aria-expanded="true"]{background:rgba(var(--tan-rgb),.14)!important;color:var(--cream)!important}
+.nv-brand b{background:none!important;color:var(--cream)!important;-webkit-text-fill-color:var(--cream)!important}
+.nv-btn{background:var(--cream)!important;color:var(--space-cadet)!important;box-shadow:none!important}
+.nv-btn:hover{background:var(--cream)!important;box-shadow:none!important}
+.nv-av{background:var(--acc,var(--tan))!important;color:var(--space-cadet)!important}

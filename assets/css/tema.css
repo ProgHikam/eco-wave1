@@ -1,0 +1,227 @@
+/* =====================================================================
+   ECO-WAVE - Tema "Ocean Power" : laut + listrik (PLTGL)
+   Dimuat PALING AKHIR dari includes/head.php. Hanya tampilan; tidak ada logika.
+   1. Token  2. Dasar  3. Utilitas (pengganti Tailwind)  4. Navbar  5. Komponen
+   6. Halaman  7. Modal & form  8. Footer  9. Responsif / gerak
+   ===================================================================== */
+
+/* ---------- 1. TOKEN ---------- */
+:root{
+  --o-0:var(--space-cadet); --o-1:var(--space-cadet); --o-2:var(--space-cadet);
+  --o-card:rgba(var(--space-cadet-rgb),.74); --o-card-hi:rgba(var(--slate-gray-rgb),.86);
+  --o-line:rgba(var(--tan-rgb),.16); --o-line-hi:rgba(var(--tan-rgb),.42);
+  --o-cyan:var(--tan); --o-sky:var(--tan); --o-aqua:var(--tan);
+  --o-bolt:var(--tan); --o-amber:var(--coffee); --o-red:var(--caput-mortuum);
+  --o-text:var(--cream); --o-mut:var(--cream);
+  --o-grad:linear-gradient(135deg,var(--tan),var(--slate-gray));
+  --o-bolt-grad:linear-gradient(135deg,var(--tan) 0%,var(--coffee) 100%);
+  --o-glow:0 0 0 1px rgba(var(--tan-rgb),.28),0 14px 44px rgba(var(--space-cadet-rgb),.6),0 0 34px rgba(var(--tan-rgb),.14);
+  --o-font:'Plus Jakarta Sans','Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --o-wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20 C75 0 150 40 225 20 S375 0 450 20 S560 38 600 20 L600 40 L0 40Z' fill='%23D5B893' fill-opacity='.10'/%3E%3Cpath d='M0 20 C75 0 150 40 225 20 S375 0 450 20 S560 38 600 20' fill='none' stroke='%23D5B893' stroke-opacity='.55' stroke-width='1.6'/%3E%3C/svg%3E");
+}
+
+/* ---------- 2. DASAR ---------- */
+html{background:var(--o-0)}
+body{
+  font-family:var(--o-font)!important; color:var(--o-text)!important; font-size:14px; line-height:1.65;
+  background:
+    radial-gradient(900px 520px at 88% -6%,rgba(var(--tan-rgb),.16),transparent 62%),
+    radial-gradient(800px 480px at -8% 14%,rgba(var(--tan-rgb),.15),transparent 60%),
+    linear-gradient(180deg,var(--space-cadet) 0%,var(--space-cadet) 55%,var(--space-cadet) 100%) fixed!important;
+}
+/* kisi sirkuit listrik halus di latar */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(rgba(var(--tan-rgb),.045) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--tan-rgb),.045) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 70% at 50% 0,var(--space-cadet) 0,transparent 78%);
+          mask-image:radial-gradient(ellipse 85% 70% at 50% 0,var(--space-cadet) 0,transparent 78%);
+}
+main{position:relative; z-index:1}
+a{color:var(--o-sky)}
+::selection{background:rgba(var(--tan-rgb),.35);color:var(--cream)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:var(--space-cadet)}
+::-webkit-scrollbar-thumb{background:var(--space-cadet);border-radius:8px;border:2px solid var(--space-cadet)}
+.wrap{max-width:80rem; margin:0 auto; padding:2.25rem 1rem 3.5rem}
+.muted{color:var(--o-mut)!important}
+.note{font-size:12.5px; color:var(--o-mut); margin:.75rem 0 0; padding-left:10px; border-left:2px solid var(--o-bolt)}
+
+/* ---------- 3. UTILITAS (Tailwind CDN sudah tidak dimuat, jadi didefinisikan di sini) ---------- */
+.hidden{display:none!important}
+.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}
+.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-between{justify-content:space-between}.justify-center{justify-content:center}
+.self-start{align-self:flex-start}.fixed{position:fixed}.inset-0{inset:0}.z-\[3000\]{z-index:3000}
+.w-full{width:100%}.w-3{width:.75rem}.h-3{height:.75rem}
+.max-w-md{max-width:28rem}.max-w-lg{max-width:32rem}.max-h-\[90vh\]{max-height:90vh}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.col-span-2{grid-column:span 2/span 2}
+.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}
+.space-y-1>*+*{margin-top:.25rem}.space-y-2>*+*{margin-top:.5rem}
+.p-2{padding:.5rem}.p-4{padding:1rem}.px-3{padding-left:.75rem;padding-right:.75rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}
+.\!py-1{padding-top:.25rem!important;padding-bottom:.25rem!important}.\!py-2{padding-top:.5rem!important;padding-bottom:.5rem!important}
+.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}
+.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.my-3{margin-top:.75rem;margin-bottom:.75rem}.ml-5{margin-left:1.25rem}
+.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.rounded-full{border-radius:9999px}
+.border{border:1px solid var(--o-line)}.border-t{border-top:1px solid var(--o-line)}
+.text-xs{font-size:.75rem;line-height:1.1rem}.text-sm{font-size:.875rem;line-height:1.35rem}.text-lg{font-size:1.125rem;line-height:1.6rem}
+.text-xl{font-size:1.25rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-5xl{font-size:3rem;line-height:1}
+.text-\[11px\]{font-size:11px}.text-left{text-align:left}.text-red-500{color:var(--caput-mortuum)}
+.font-extrabold{font-weight:800}.font-normal{font-weight:400}.leading-none{line-height:1}.whitespace-nowrap{white-space:nowrap}
+.list-decimal{list-style:decimal}.accent-teal-600{accent-color:var(--slate-gray)}
+.bg-black\/50{background:rgba(var(--space-cadet-rgb),.7);backdrop-filter:blur(4px)}
+.bg-amber-50{background:rgba(var(--tan-rgb),.10);color:var(--tan)}
+.bg-slate-100,.dark\:bg-slate-800{background:rgba(var(--tan-rgb),.08)}
+@media(min-width:768px){
+  .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .md\:col-span-2{grid-column:span 2/span 2}
+}
+@media(min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- 4. NAVBAR ---------- */
+.topnav{background:rgba(var(--space-cadet-rgb),.80)!important; backdrop-filter:blur(3px)!important; -webkit-backdrop-filter:blur(3px)!important; border-bottom:1px solid var(--o-line)!important; box-shadow:0 12px 40px rgba(var(--space-cadet-rgb),.4)!important}
+.topnav::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px; pointer-events:none; background:linear-gradient(90deg,transparent,var(--tan) 25%,var(--tan) 50%,var(--tan) 75%,transparent); opacity:.6}
+body[data-page=beranda] .topnav{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.82),rgba(var(--space-cadet-rgb),.38) 75%,rgba(var(--space-cadet-rgb),0))!important; border-bottom:1px solid rgba(var(--tan-rgb),.12)!important; box-shadow:none!important}
+.brand{font-family:var(--o-font)!important}
+.brand-text{font-weight:800}
+.navlinks a{font-family:var(--o-font); position:relative}
+.navlinks a:hover{background:rgba(var(--tan-rgb),.12)!important}
+.navlinks a.on{box-shadow:none!important; background:rgba(var(--tan-rgb),.14)!important; color:var(--cream)!important}
+.navlinks a.on::after{content:""; position:absolute; left:12px; right:12px; bottom:3px; height:2px; border-radius:2px; background:var(--o-bolt-grad); box-shadow:0 0 10px rgba(var(--tan-rgb),.7)}
+.navcta{background:var(--o-bolt-grad)!important; color:var(--space-cadet)!important; font-weight:800!important; box-shadow:0 6px 22px rgba(var(--tan-rgb),.28)!important}
+.nav-login{border:1px solid var(--o-line-hi)!important; background:rgba(var(--tan-rgb),.08)!important}
+.nav-login:hover{background:rgba(var(--tan-rgb),.18)!important}
+
+/* ---------- 5. KOMPONEN ---------- */
+.card{
+  background:var(--o-card)!important; border:1px solid var(--o-line)!important; border-radius:18px!important;
+  color:var(--o-text); padding:1.1rem 1.2rem; box-shadow:0 12px 34px rgba(var(--space-cadet-rgb),.38);
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+}
+.card b{color:var(--cream)}
+.card.lift{transition:transform .2s,box-shadow .2s,border-color .2s}
+.card.lift:hover{transform:translateY(-4px); border-color:var(--o-line-hi)!important; box-shadow:var(--o-glow)!important}
+
+.btn,.btn2{font-family:var(--o-font); font-weight:800; border-radius:999px!important; cursor:pointer; text-decoration:none; transition:transform .15s,box-shadow .15s,filter .15s,background .15s}
+.btn{background:var(--o-bolt-grad)!important; color:var(--space-cadet)!important; border:0!important; box-shadow:0 6px 22px rgba(var(--tan-rgb),.28)}
+.btn:hover{filter:brightness(1.07); box-shadow:0 10px 30px rgba(var(--tan-rgb),.42); transform:translateY(-1px)}
+.btn2{background:rgba(var(--tan-rgb),.10)!important; color:var(--cream)!important; border:1px solid var(--o-line-hi)!important}
+.btn2:hover{background:rgba(var(--tan-rgb),.2)!important}
+.chip{font-family:var(--o-font)}
+
+/* judul halaman */
+.page-head{position:relative; margin-bottom:1.5rem; padding-left:18px}
+.page-head::before{content:""; position:absolute; left:0; top:5px; bottom:5px; width:4px; border-radius:4px; background:var(--o-bolt-grad); box-shadow:0 0 16px rgba(var(--tan-rgb),.65)}
+.page-head h1{font-size:clamp(1.7rem,3.2vw,2.4rem)!important; font-weight:800!important; letter-spacing:-.025em; color:var(--cream)!important; margin:0; line-height:1.15}
+.page-head p{color:var(--o-mut)!important; margin:.45rem 0 0; max-width:70ch}
+.page-head.band{
+  padding:1.7rem 1.9rem 1.7rem 2.2rem; border:1px solid var(--o-line-hi); border-radius:20px; overflow:hidden;
+  background:linear-gradient(120deg,rgba(var(--space-cadet-rgb),.92) 0%,rgba(var(--space-cadet-rgb),.75) 60%,rgba(var(--slate-gray-rgb),.55) 100%)!important;
+  box-shadow:var(--o-glow);
+}
+.page-head.band::before{left:12px}
+.page-head.band::after{content:""; position:absolute; left:0; right:0; bottom:0; height:34px; background:var(--o-wave) repeat-x; background-size:600px 34px; opacity:.85; animation:o-ombak 22s linear infinite}
+.page-head.band p{color:var(--cream)!important}
+
+/* KPI halaman Hasil */
+.kpi-big{position:relative; overflow:hidden; padding:1.15rem 1.2rem!important}
+.kpi-big::after{content:""; position:absolute; right:-34px; top:-34px; width:120px; height:120px; border-radius:50%; background:radial-gradient(circle,rgba(var(--tan-rgb),.26),transparent 70%); pointer-events:none}
+.kpi-label{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--o-bolt)}
+.kpi-label.teal{color:var(--o-aqua)}.kpi-label.red{color:var(--o-red)}
+.kpi-num{font-size:clamp(2rem,3.2vw,2.7rem); font-weight:800; line-height:1.1; margin:.5rem 0 .3rem; letter-spacing:-.02em; background:linear-gradient(135deg,var(--cream) 20%,var(--tan)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.kpi-num.teal{background:linear-gradient(135deg,var(--cream),var(--tan)); -webkit-background-clip:text; background-clip:text}
+.kpi-num small{font-size:.95rem; font-weight:700; -webkit-text-fill-color:var(--o-mut); color:var(--o-mut)}
+.kpi-big p{margin:0; font-size:12.5px; color:var(--o-mut)}
+
+/* KPI beranda (diisi beranda.js) */
+.kpi .kn{font-size:2.2rem; font-weight:800; line-height:1.1; letter-spacing:-.02em; background:linear-gradient(135deg,var(--cream) 10%,var(--tan) 60%,var(--tan)); -webkit-background-clip:text; background-clip:text; color:transparent!important}
+
+/* tabel */
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+th{text-align:left; background:rgba(var(--tan-rgb),.09); color:var(--tan); font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.07em; padding:10px 12px; border-bottom:1px solid var(--o-line)}
+td{padding:10px 12px; border-bottom:1px solid rgba(var(--tan-rgb),.09)}
+tbody tr:hover td{background:rgba(var(--tan-rgb),.06)}
+tr.hl td{background:rgba(var(--tan-rgb),.11)!important; color:var(--cream); font-weight:700}
+tr.hl td:first-child{box-shadow:inset 3px 0 0 var(--o-bolt)}
+
+/* ---------- 6. HALAMAN ---------- */
+canvas{max-width:100%}
+body[data-page=admin] main{max-width:62rem; margin:0 auto; padding:2rem 1rem 3.5rem}
+body[data-page=admin] .card{padding:1.3rem 1.4rem}
+body[data-page=admin] .card>b{display:block; font-size:1.15rem; margin-bottom:.25rem}
+body[data-page=admin] form input,body[data-page=admin] form select{width:100%}
+body[data-page=admin] td form{margin:0}
+body[data-page=admin] td form select{width:auto; padding:.35rem .5rem}
+body[data-page=admin] td .btn2{padding:.35rem .8rem; font-size:12.5px}
+body[data-page=tentang] ol li{padding:.25rem 0; color:var(--cream)}
+body[data-page=tentang] ol li::marker{color:var(--o-bolt); font-weight:800}
+body[data-page=tentang] .card h2,body[data-page=tentang] .card h3{color:var(--cream)}
+body[data-page=tentang] ul li{padding:.2rem 0; color:var(--cream)}
+body[data-page=hasil] .wrap>.grid{margin-top:1rem}
+#top3{gap:1.1rem}
+#top3 .card.lift{padding:1.3rem; position:relative; overflow:hidden}
+#top3 .card.lift:first-child{border-color:rgba(var(--tan-rgb),.55)!important; box-shadow:0 0 0 1px rgba(var(--tan-rgb),.25),0 14px 44px rgba(var(--space-cadet-rgb),.6),0 0 40px rgba(var(--tan-rgb),.12)!important}
+#top3 .card.lift::after{content:""; position:absolute; right:-26px; top:-26px; width:100px; height:100px; border-radius:50%; background:radial-gradient(circle,rgba(var(--tan-rgb),.2),transparent 70%)}
+#top3 .card.lift:first-child::after{background:radial-gradient(circle,rgba(var(--tan-rgb),.28),transparent 70%)}
+
+/* ---------- 7. MODAL & FORM ---------- */
+input,select,textarea{font-family:inherit; color:var(--o-text); background:rgba(var(--cream-rgb),.06); border:1px solid var(--o-line); border-radius:10px; padding:.55rem .75rem; outline:none; font-size:13.5px}
+input:focus,select:focus,textarea:focus{border-color:var(--o-cyan); box-shadow:0 0 0 3px rgba(var(--tan-rgb),.18)}
+input::placeholder,textarea::placeholder{color:var(--slate-gray)}
+option{background:var(--space-cadet); color:var(--cream)}
+input[type=checkbox],input[type=radio]{padding:0; width:auto; accent-color:var(--tan)}
+input[type=range]{padding:0; background:transparent; border:0; accent-color:var(--tan)}
+label{color:var(--o-mut); font-size:12.5px}
+#modalForm .card,#modalCMEMS .card{background:var(--o-card-hi)!important; border-color:var(--o-line-hi)!important; box-shadow:var(--o-glow)!important}
+#modalForm label,#modalCMEMS label{display:block}
+#modalForm input{margin-top:4px}
+#loginModal .modal-box{background:linear-gradient(180deg,var(--slate-gray),var(--space-cadet))!important; border:1px solid var(--o-line-hi)!important; box-shadow:var(--o-glow); border-radius:20px!important}
+#loginModal .modal-box h3{margin:0 0 6px; font-size:1.3rem; font-weight:800}
+#loginModal .btn{background:var(--o-bolt-grad)!important; color:var(--space-cadet)!important; border-radius:12px!important}
+#loginModal input{background:rgba(var(--cream-rgb),.07)!important; border:1px solid var(--o-line)!important}
+#loginModal.is-open{backdrop-filter:blur(3px)}
+
+/* ---------- 8. FOOTER ---------- */
+.footer{position:relative; margin-top:56px; padding-top:34px; background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),0),var(--space-cadet) 55%); border-top:0}
+.footer::before{content:""; position:absolute; left:0; right:0; top:0; height:34px; background:var(--o-wave) repeat-x; background-size:600px 34px; animation:o-ombak 26s linear infinite}
+.footer .wrap{padding:22px 16px!important; color:var(--o-mut)!important}
+
+/* ---------- 9. GERAK & RESPONSIF ---------- */
+@keyframes o-ombak{from{background-position-x:0}to{background-position-x:-600px}}
+@media(max-width:700px){
+  .wrap{padding:1.4rem .85rem 2.5rem}
+  .page-head.band{padding:1.3rem 1.2rem 1.6rem 1.5rem}
+  table{font-size:12.5px}th,td{padding:8px 8px}
+  .card{padding:.95rem 1rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .footer::before,.page-head.band::after{animation:none!important}
+  .card.lift:hover,.btn:hover{transform:none}
+}
+
+/* ---------- Tabel sumber data (tentang.php) ---------- */
+.src-legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.src-chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:700;white-space:nowrap;border:1px solid transparent}
+.src-nyata{background:rgba(var(--slate-gray-rgb),.14);color:var(--tan);border-color:rgba(var(--slate-gray-rgb),.4)}
+.src-live{background:rgba(var(--tan-rgb),.14);color:var(--tan);border-color:rgba(var(--tan-rgb),.4)}
+.src-acuan{background:rgba(var(--tan-rgb),.14);color:var(--tan);border-color:rgba(var(--tan-rgb),.45)}
+.src-demo{background:rgba(var(--tan-rgb),.14);color:var(--tan);border-color:rgba(var(--tan-rgb),.45)}
+.src-asumsi{background:rgba(var(--tan-rgb),.15);color:var(--cream);border-color:rgba(var(--tan-rgb),.45)}
+.src-belum{background:rgba(var(--tan-rgb),.14);color:var(--cream);border-color:rgba(var(--tan-rgb),.4)}
+.src-manual{background:rgba(var(--tan-rgb),.14);color:var(--tan);border-color:rgba(var(--tan-rgb),.45)}
+.src-scroll{overflow-x:auto;border:1px solid var(--o-line);border-radius:14px}
+.src-table{min-width:1180px;font-size:13.5px;line-height:1.55}
+.src-table th{position:sticky;top:0;white-space:nowrap}
+.src-table td{vertical-align:top;color:var(--cream)}
+.src-table td b{color:var(--cream)}
+.src-table code{font-size:12px;color:var(--cream);word-break:break-all}
+.src-table .nowrap{white-space:nowrap}
+.src-table tr.src-grup td{background:rgba(var(--tan-rgb),.08)!important;color:var(--tan);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px}
+.src-table td:nth-child(3){min-width:280px}
+.src-simulasi{background:rgba(var(--tan-rgb),.16);color:var(--tan);border-color:rgba(var(--tan-rgb),.5)}
+
+/* Modal "Data Lokasi" & "Tambah dari titik CMEMS": di atas navbar + tombol tutup selalu terlihat */
+#modalForm,#modalCMEMS{z-index:2147482500!important}
+#modalForm .card,#modalCMEMS .card{position:relative}
+.mdl-x{position:sticky;top:0;float:right;z-index:2;width:34px;height:34px;margin:-6px -6px 0 8px;border:0;border-radius:10px;cursor:pointer;font-size:22px;line-height:1;color:var(--cream);background:rgba(var(--cream-rgb),.12);transition:background .2s}
+.mdl-x:hover,.mdl-x:focus-visible{background:rgba(var(--cream-rgb),.26);outline:2px solid var(--tan);outline-offset:1px}

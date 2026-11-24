@@ -1,0 +1,10 @@
+# Catatan v11
+
+- **Aksesibilitas (kontras gelap/terang)**: lapisan peredup `#a11yScrim` tidak lagi dibuat solid, sehingga halaman, video latar, dan animasi tetap terlihat saat panel terbuka. Lapisan di atas video dikurangi; hero di mode terang tidak lagi gelap.
+- **Data PLTGL diperbarui** dari `Data_PLTGL` (dijalankan ulang `scripts/prepare_pltgl.py`; pencarian berkas kini berdasarkan nama berkas): perairan (82 -> 14 poligon), jalur listrik (591 -> 149), gardu (67 -> 1), jalur pelayaran (48 -> 24). Layer lain tidak berubah. Versi lama disimpan di `assets/data/pltgl/_versi_lama/` (tidak dimuat web).
+- **Tentang Data / Celah / inventaris_data.csv** disesuaikan dengan data baru.
+- **Animasi beranda** kini membaca data situs: Hs/Te CMEMS P0 mengatur amplitudo dan periode ayunan, daya listrik mengatur laju aliran kabel, jumlah fitur layer dibaca dari `manifest.json`, dan parameter perangkat/penyangga dari Kalkulator.
+- **Halaman Hasil CMEMS dihapus** (`hasil.php`, `hasil.js`, menu navbar, tombol/kartu di Beranda, Tentang Web, Teknologi, indeks pencarian). Datanya (`CMEMS` di `data.js`) tetap dipakai: saat peta diklik, hasil klik menampilkan estimasi bulanan dan musiman di titik itu (klimatologi bulanan/musiman P0 diskalakan dengan rasio daya IDW titik ÷ P0), lengkap dengan listrik dan rumah 450 VA tiap musim. Fungsinya: `estimasiCMEMS()` di `data.js`.
+- **Animasi beranda** kini memakai peringkat 1 Lokasi Terbaik (kandidat tidak tereksklusi): nama, skor, kelas, daya kW/m, listrik, dan rumah terlayani. CMEMS menjadi parameter tambahan: Hs/Te diinterpolasi di lokasi itu (mengatur ayunan dan ombak) dan daya P0 ditampilkan sebagai pembanding. Parameter sebelumnya (jumlah layer, penyangga, BMKG, perangkat) tetap ada.
+- **Aksesibilitas**: pilihan jenis font (Verdana, Lexend, Atkinson Hyperlegible, OpenDyslexic, Serif). Font web dimuat hanya saat dipilih (butuh internet; tanpa internet memakai font sistem cadangan). Pengaturan lama "font mudah dibaca" tetap terbaca sebagai Verdana.
+- **Tentang Data**: ditambah tabel "Pembaruan paket data PLTGL" (mentah / web / versi lama / status per berkas).

@@ -1,0 +1,35 @@
+/* ECO-WAVE - Peta: kartu hasil klik yang bersih (satu kartu, tab per topik) + panel kanan ringkas */
+#hasilKlik .klik-hasil{display:flex;flex-direction:column;gap:10px}
+.kh-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0!important}
+.kh-head b{font-size:15px;color:var(--cream)}.kh-head small{display:block;color:var(--tan);font-size:11.5px;font-weight:500}
+.kh-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.kh-kpi>div{padding:9px 11px;border-radius:12px;background:rgba(var(--cream-rgb),.06);border:1px solid rgba(var(--cream-rgb),.1)}
+.kh-kpi span{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--tan)}
+.kh-kpi b{display:block;font-size:20px;line-height:1.2;color:var(--cream);margin-top:2px}
+.kh-kpi small{display:block;font-size:11.5px;color:var(--cream);margin-top:1px}
+.kh-ban{padding:8px 12px;border-radius:10px;font-size:12.5px}
+.kh-ban.bad{background:rgba(var(--caput-mortuum-rgb),.16);border:1px solid rgba(var(--caput-mortuum-rgb),.45);color:var(--cream)}
+.kh-ban.warn{background:rgba(var(--coffee-rgb),.14);border:1px solid rgba(var(--coffee-rgb),.45);color:var(--tan)}
+.kh-tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid rgba(var(--cream-rgb),.12);padding-bottom:8px}
+.kh-tab{padding:6px 13px;border-radius:999px;border:0;background:transparent;color:var(--tan);font:600 12.5px 'Inter',system-ui,sans-serif;cursor:pointer}
+.kh-tab:hover{background:rgba(var(--cream-rgb),.08)}.kh-tab.on{background:rgba(var(--tan-rgb),.15);color:var(--cream)}
+.kh-pane{display:none}.kh-pane.on{display:block}
+.kh-note{font-size:11.5px;line-height:1.5;color:var(--tan);margin:6px 0 0}
+.kh-meter{display:inline-block;width:56px;height:6px;border-radius:4px;background:rgba(var(--cream-rgb),.14);vertical-align:middle;margin-right:8px;overflow:hidden}
+.kh-meter i{display:block;height:100%}
+#hasilKlik .kh-tbl{margin:0 0 8px}
+#hasilKlik .kh-tbl td,#hasilKlik .kh-tbl th{padding:6px 10px!important;font-size:13px!important}
+#hasilKlik .kh-tbl th{font-size:11px!important;letter-spacing:.05em;text-transform:uppercase;color:var(--tan)}
+#hasilKlik .kh-tbl tfoot td{border-top:1px solid rgba(var(--cream-rgb),.16)}
+.kh-cat summary{cursor:pointer;font-size:12.5px;color:var(--tan);font-weight:600}.kh-cat .cp-warn{margin-top:6px}
+.kh-aksi{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+.kh-aksi .kh-simpan{margin:0;flex:1 1 320px}.kh-aksi .kh-link{margin:0}
+.kh-live{font-size:13px}
+/* panel kanan: grafik kandidat dilipat supaya tidak ramai */
+.kh-grafik{border-radius:16px;background:rgba(var(--space-cadet-rgb),.6);border:1px solid rgba(var(--cream-rgb),.12);padding:0 12px}
+.kh-grafik>summary{cursor:pointer;padding:11px 2px;font-size:13px;font-weight:700;color:var(--cream);list-style:none}
+.kh-grafik>summary::-webkit-details-marker{display:none}
+.kh-grafik>summary::after{content:'▸';float:right;opacity:.7}.kh-grafik[open]>summary::after{content:'▾'}
+.kh-grafik .hud-box{margin:0 0 10px!important;box-shadow:none!important;background:none!important;border:0!important;padding:0!important}
+.hud-info .hud-det{margin-top:8px}
+@media(max-width:700px){.kh-kpi{grid-template-columns:repeat(2,minmax(0,1fr))}}

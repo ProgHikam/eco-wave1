@@ -1,0 +1,6 @@
+{"code":"P.I.06","name":"Perairan Selatan Lebak","issued":"2026-11-13 00:00 UTC","valid_from":"2026-11-13 00:00 UTC","valid_to":"2026-11-17 00:00 UTC","no_surat":"CONTOH/UJI",
+ "forecast_day1":[{"time":"2026-11-13 00:00 UTC","weather":"Cerah Berawan","temp_avg":27,"wind_speed":10,"wind_gust":15,"wind_from":"Tenggara","wave_cat":"Sedang","wave_height":1.8,"current_speed":0.4,"current_to":"Barat"},
+                  {"time":"2026-11-13 01:00 UTC","weather":"Cerah Berawan","temp_avg":27,"wind_speed":11,"wind_gust":16,"wind_from":"Tenggara","wave_cat":"Sedang","wave_height":2.0,"current_speed":0.5,"current_to":"Barat"}],
+ "forecast_day2-4":[{"time":"2026-11-14 00:00 UTC","weather":"Berawan","temp_avg":27,"wind_speed":12,"wind_gust":18,"wind_from":"Selatan","wave_cat":"Sedang","wave_height":2.2,"current_speed":0.5,"current_to":"Barat"},
+                    {"time":"2026-11-14 03:00 UTC","weather":"Berawan","temp_avg":27,"wind_speed":12,"wind_gust":18,"wind_from":"Selatan","wave_cat":"Tinggi","wave_height":2.6,"current_speed":0.6,"current_to":"Barat"},
+                    {"time":"2026-11-14 06:00 UTC","weather":"Rusak","temp_avg":27,"wind_speed":12,"wind_gust":18,"wind_from":"Selatan","wave_cat":"Sedang","wave_height":"x","current_speed":0.6,"current_to":"Barat"}]}

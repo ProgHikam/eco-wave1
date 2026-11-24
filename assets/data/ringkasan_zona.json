@@ -1,0 +1,20 @@
+{
+ "dibuat": "2026-11-17",
+ "step_derajat": 0.01,
+ "sel": 1010,
+ "tereksklusi": 47,
+ "layak": 272,
+ "kelas": {
+  "Cukup Layak": 508,
+  "Kurang Layak": 181,
+  "Layak": 272,
+  "Tidak Layak": 2
+ },
+ "bobot": {
+  "daya": 0.4,
+  "eko": 0.3,
+  "ked": 0.15,
+  "jar": 0.15
+ },
+ "catatan": "Grid +-1 km di perairan pesisir 5 km, CMEMS tahunan, bobot & parameter bawaan, eksklusi ON. Dihitung offline oleh scripts/hitung_kandidat.js."
+}

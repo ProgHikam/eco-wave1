@@ -1,0 +1,100 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.265,
+     -6.665
+    ]
+   },
+   "properties": {
+    "name": "Cikeusik / Ujung Kulon",
+    "region": "Pandeglang",
+    "daya_kw_m": 23.3,
+    "final": 3.56,
+    "kelas": "Layak",
+    "eko_terverifikasi": true,
+    "catatan": "Hasil scripts/hitung_kandidat.js, EPSG:4326"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.615,
+     -6.885
+    ]
+   },
+   "properties": {
+    "name": "Panimbang",
+    "region": "Pandeglang",
+    "daya_kw_m": 22.9,
+    "final": 3.72,
+    "kelas": "Layak",
+    "eko_terverifikasi": true,
+    "catatan": "Hasil scripts/hitung_kandidat.js, EPSG:4326"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.825,
+     -6.875
+    ]
+   },
+   "properties": {
+    "name": "Binuangeun",
+    "region": "Lebak",
+    "daya_kw_m": 22.4,
+    "final": 3.28,
+    "kelas": "Cukup Layak",
+    "eko_terverifikasi": true,
+    "catatan": "Hasil scripts/hitung_kandidat.js, EPSG:4326"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.065,
+     -6.875
+    ]
+   },
+   "properties": {
+    "name": "Bayah",
+    "region": "Lebak",
+    "daya_kw_m": 22.1,
+    "final": 3.91,
+    "kelas": "Layak",
+    "eko_terverifikasi": false,
+    "catatan": "Hasil scripts/hitung_kandidat.js, EPSG:4326"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.215,
+     -6.935
+    ]
+   },
+   "properties": {
+    "name": "Sawarna",
+    "region": "Lebak",
+    "daya_kw_m": 21.8,
+    "final": 3.81,
+    "kelas": "Layak",
+    "eko_terverifikasi": false,
+    "catatan": "Hasil scripts/hitung_kandidat.js, EPSG:4326"
+   }
+  }
+ ]
+}

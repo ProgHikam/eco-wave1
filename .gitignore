@@ -1,0 +1,5 @@
+config/config.local.php
+config/windy.php
+database_pengguna.sql
+assets/vendor/
+*.bak

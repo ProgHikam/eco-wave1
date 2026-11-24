@@ -1,0 +1,153 @@
+/* ECO-WAVE - Peta lebih simpel & profesional (hanya tampilan). Dimuat paling akhir di peta.php. */
+#peta .hud-vignette{background:none!important}
+#peta .hud-top{top:62px!important}
+#peta .hud-title{padding:5px 14px!important;background:rgba(var(--space-cadet-rgb),.55)!important;box-shadow:none!important;font-size:12px!important;display:inline-flex!important;gap:8px;align-items:baseline}
+#peta .hud-title b{font-size:12.5px!important;font-weight:600!important}.hud-title i{font-size:11px!important;font-style:normal;opacity:.8}
+#peta .hud-top-r span{background:rgba(var(--space-cadet-rgb),.55);padding:5px 12px;border-radius:999px;border:1px solid rgba(var(--cream-rgb),.16);font-size:11px}
+#peta .hud-panel{top:128px!important;bottom:92px!important;gap:10px!important}
+#peta .hud-left{left:12px!important}.hud-right{right:12px!important}
+#peta .hud-box{padding:12px 14px 14px!important;border-radius:14px!important;background:rgba(var(--space-cadet-rgb),.72)!important;box-shadow:0 6px 20px rgba(var(--space-cadet-rgb),.25)!important;border:1px solid rgba(var(--cream-rgb),.14)!important}
+#peta .hud-h{font-family:'Sora','Inter',sans-serif!important;font-size:11px!important;font-weight:500!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--tan)!important;margin:0 0 10px!important;padding:0 28px 8px 0!important;border-bottom:1px solid rgba(var(--cream-rgb),.12)}
+#peta .hud-h i{color:var(--tan)!important;margin-right:4px}
+#peta .hud-box .hud-x{width:22px!important;height:22px!important;font-size:15px!important;right:8px!important;top:8px!important;background:transparent!important;border-color:transparent!important;opacity:.7}
+#peta .hud-box .hud-x:hover{opacity:1}
+#peta .hud-lebar{font-size:10.5px!important;padding:3px 9px!important}
+#peta .hud-chips{display:flex!important;flex-wrap:nowrap!important;gap:6px!important;margin-top:8px!important}
+#peta .hud-chips .hud-btn{flex:1;font-size:11.5px!important;padding:6px 8px!important;white-space:nowrap}
+/* kartu di dalam panel diratakan: tanpa kotak bersarang */
+#peta .hud-scroll .card,#peta .tabpanel>.card{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0 0 12px!important;margin:0 0 12px!important;border-bottom:1px solid rgba(var(--cream-rgb),.1)!important}
+#peta .hud-scroll .card:last-child,#peta .tabpanel>.card:last-child{border-bottom:0!important;margin-bottom:0!important}
+#peta .hud-scroll .card b:first-child{font-family:'Sora','Inter',sans-serif;font-weight:500;font-size:13px}
+/* titik terpilih ringkas */
+#peta .hud-gauge{width:84px!important;height:84px!important}
+#peta .hud-big b{font-size:26px!important}
+#peta .hud-cards3{gap:6px!important}.hud-cards3>div{padding:7px 4px!important;border-radius:10px!important;background:rgba(var(--cream-rgb),.06)!important}
+#peta .kh-grafik>summary{background:rgba(var(--space-cadet-rgb),.72)!important;border:1px solid rgba(var(--cream-rgb),.14)!important;border-radius:14px!important;padding:11px 14px!important;font-size:12.5px!important;font-weight:500!important}
+/* dock tipis */
+#peta .hud-dock{bottom:12px!important;padding:5px 10px!important;gap:2px!important;background:rgba(var(--space-cadet-rgb),.72)!important}
+#peta .hud-dock button{min-width:68px!important;font-size:10.5px!important;gap:2px!important;padding:3px 4px!important}
+#peta .hud-dock button i{width:32px!important;height:26px!important;font-size:15px!important;background:transparent!important;border-color:transparent!important}
+#peta .hud-dock button.on i,#peta .hud-dock button:hover i{background:var(--tan)!important;color:var(--space-cadet)!important}
+#peta .hud-info{border-radius:14px!important;background:rgba(var(--space-cadet-rgb),.8)!important}
+@media(max-width:900px){#peta .hud-left,#peta .hud-right{width:auto!important}#peta .hud-panel{top:112px!important}}
+
+body[data-page=peta] nav.nv#nv{background:rgba(var(--space-cadet-rgb),.5)!important;border-color:rgba(var(--cream-rgb),.22)!important}
+#peta .hud-panel,#peta .hud-right,#peta .hud-left{background:none!important;box-shadow:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#peta .kh-grafik{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+#peta .kh-grafik>summary{margin:0!important;list-style:none;display:flex;justify-content:space-between;align-items:center}
+#peta .hud-box{box-shadow:0 4px 14px rgba(var(--space-cadet-rgb),.18)!important}
+
+/* ===== v2: tata letak ringkas - pencarian jadi kapsul melayang di tengah atas; panel kiri hanya Map/Layer ===== */
+#peta #hudLeft>.hud-box:first-child{position:fixed!important;top:66px!important;left:50%!important;transform:translateX(-50%)!important;z-index:560;
+  width:min(540px,calc(100vw - 700px))!important;min-width:380px;display:flex!important;align-items:center;gap:6px;padding:5px 6px 5px 16px!important;border-radius:999px!important;pointer-events:auto}
+#peta #hudLeft>.hud-box:first-child .hud-h,#peta #hudLeft>.hud-box:first-child .hud-x{display:none!important}
+#peta #hudLeft>.hud-box:first-child input{flex:1;min-width:0;height:34px!important;border:0!important;background:transparent!important;box-shadow:none!important;padding:0 4px!important;font-size:13.5px!important}
+#peta #hudLeft>.hud-box:first-child::before{content:"\F52A";font-family:"bootstrap-icons";color:var(--tan);font-size:14px;margin-right:2px;display:block!important}
+#peta #hudLeft>.hud-box:first-child .hud-chips{margin:0!important;flex:none}
+#peta #hudLeft>.hud-box:first-child .hud-chips .hud-btn{flex:none;height:32px;padding:0 12px!important;font-size:11.5px!important}
+#peta .hud-top{top:66px!important}
+#peta .hud-title{background:none!important;border:0!important;padding:0 0 0 4px!important}
+#peta .hud-top-r span{background:none!important;border:0!important;padding:0 4px 0 0!important;opacity:.85}
+#peta .hud-panel{top:128px!important}
+#peta.hud{--hud-wl:clamp(310px,25vw,350px);--hud-wr:clamp(270px,22vw,300px)}#peta.hud.lebar{--hud-wl:clamp(500px,42vw,640px)}
+#peta .hud-left{width:var(--hud-wl)!important}#peta .hud-right{width:var(--hud-wr)!important}
+#peta .hud-top .hud-title{width:auto!important;height:auto!important}
+#peta .hud-box{background:rgba(var(--space-cadet-rgb),.66)!important;border-color:rgba(var(--cream-rgb),.1)!important;box-shadow:none!important}
+#peta .hud-h{border-bottom:0!important;padding-bottom:2px!important;margin-bottom:8px!important}
+/* titik terpilih: sejajar, lebih rapat */
+#peta .hud-gauge{width:68px!important;height:68px!important}
+#peta .hud-big b{font-size:22px!important}
+#peta .hud-stats{margin:6px 0!important}
+#peta .hud-dock button span{font-size:10px!important}
+@media(max-width:1100px){#peta #hudLeft>.hud-box:first-child{width:min(480px,calc(100vw - 40px))!important;top:112px!important}#peta .hud-panel{top:160px!important}}
+@media(max-width:900px){#peta #hudLeft>.hud-box:first-child{min-width:0;width:calc(100vw - 24px)!important}}
+#peta .hud-title,#peta .hud-top-r span{background:rgba(var(--space-cadet-rgb),.66)!important;border:1px solid rgba(var(--cream-rgb),.14)!important;padding:5px 13px!important;border-radius:999px!important}
+#peta .hud-top{left:12px!important;right:12px!important;width:auto!important}
+#peta .hud-grow{flex:0 1 auto!important}
+#peta .hud-scroll{background:none!important;box-shadow:none!important}
+#peta .hud-left{overflow:visible}
+
+/* v3: pemilih peta dasar (Peta/Satelit...) dan zoom turun di bawah kapsul pencarian agar tidak tumpang tindih */
+#peta .leaflet-top.leaflet-right{top:134px!important}
+#peta .leaflet-top.leaflet-left{top:134px!important}
+#peta #hudLeft>.hud-box:first-child::before{position:static!important;inset:auto!important;transform:none!important;width:auto!important;height:auto!important;background:none!important;border:0!important;flex:none;line-height:1}
+@media(max-width:1100px){#peta .leaflet-top.leaflet-right,#peta .leaflet-top.leaflet-left{top:176px!important}}
+
+/* ===== v4: rapikan kartu "Titik Terpilih" dan "Map / Layer" ===== */
+/* -- Titik Terpilih -- */
+#peta .hud-gauge-wrap{display:grid!important;grid-template-columns:auto 1fr;gap:14px!important;align-items:center;margin:2px 0 4px}
+#peta .hud-gauge{width:84px!important;height:84px!important}
+#peta .g-txt b{font-size:17px!important;text-shadow:none!important;letter-spacing:-.02em}
+#peta .g-txt span{font-size:8px!important;letter-spacing:.1em!important;margin-top:3px!important;max-width:54px;line-height:1.15}
+#peta .hud-big b{font-size:24px!important;text-shadow:none!important;line-height:1.1}
+#peta .hud-big small{font-size:12px!important}
+#peta .hud-big div{font-size:11.5px!important;line-height:1.4!important;margin-top:4px!important;opacity:.85;overflow-wrap:anywhere}
+#peta .hud-stats{margin:8px 0 10px!important}
+#peta .hud-stats>div{padding:9px 0!important;border-top:1px solid rgba(var(--cream-rgb),.12)!important;border-bottom:1px solid rgba(var(--cream-rgb),.12);background:none!important;font-size:12.5px;align-items:baseline}
+#peta .hud-stats span{opacity:.8}
+#peta .hud-cards3{display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px!important}
+#peta .hud-cards3>div{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 4px!important;min-height:58px;border:1px solid rgba(var(--cream-rgb),.14)!important;border-radius:12px!important;background:rgba(var(--cream-rgb),.05)!important}
+#peta .hud-cards3 b{font-size:17px!important;font-weight:600;line-height:1}
+#peta .hud-cards3 span{font-size:11px!important;opacity:.8;text-transform:none}
+
+/* -- Map / Layer -- */
+#peta .hud-grow .hud-h{display:flex;align-items:center;gap:6px;padding-right:112px!important}
+#peta .hud-box .hud-lebar{top:9px!important;right:36px!important;height:22px!important;padding:0 9px!important;font-size:10.5px!important}
+#peta .hud-scroll{padding:0 8px 0 0!important;margin-right:-2px}
+#peta .hud-scroll .card b:first-child{display:block;font:500 10.5px/1.2 'Inter',sans-serif!important;letter-spacing:.14em;text-transform:uppercase;color:var(--tan)!important;margin:0 0 10px!important}
+#peta .hud-scroll .card>span.text-xs{display:inline-block;margin:-2px 0 8px 8px;padding:1px 8px;border-radius:999px;border:1px solid rgba(var(--tan-rgb),.45);font-size:10px!important;opacity:1!important;color:var(--tan)}
+#peta .hud-scroll label{display:flex!important;align-items:center;gap:10px!important;min-height:30px;font-size:13px!important;line-height:1.3;cursor:pointer;margin:0}
+#peta .hud-scroll label span{flex:1;min-width:0}
+#peta .hud-scroll input[type=checkbox]{width:16px;height:16px;margin:0;flex:none;accent-color:var(--tan)}
+#peta .hud-scroll label i{flex:none;border-radius:4px}
+#peta .hud-scroll .layer-grid{margin-top:0!important;gap:2px 12px!important}
+#peta #ecoLayers,#peta #asikLayers{gap:0!important;margin-top:0!important}
+#peta .hud-scroll details{margin-top:6px!important;border-top:1px solid rgba(var(--cream-rgb),.08);padding-top:2px}
+#peta .hud-scroll summary{padding:8px 0;font-size:12.5px!important;color:var(--cream);list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+#peta .hud-scroll summary::-webkit-details-marker{display:none}
+#peta .hud-scroll summary::after{content:"+";color:var(--tan);font-size:15px}
+#peta .hud-scroll details[open] summary::after{content:"\2212"}
+#peta .hud-scroll .text-xs{font-size:11.5px!important;line-height:1.55}
+#peta .hud-scroll .flex.gap-2,#peta .hud-scroll .flex.flex-wrap.gap-2{display:flex;gap:8px!important;margin-top:10px!important}
+#peta .hud-scroll .btn,#peta .hud-scroll .btn2{flex:1;justify-content:center;text-align:center;font-size:12.5px!important;padding:8px 10px!important}
+#peta .hud-scroll .card{margin:0 0 14px!important;padding:0 0 14px!important}
+#peta .hud-scroll .card>b:first-child+span.text-xs{margin:0 0 10px 6px}
+#peta .hud-scroll .card>b:first-child:has(+span.text-xs){display:inline-block}
+
+/* ---- jarak isi panel kiri dengan tepi (rapi, tidak mepet) ---- */
+#peta .hud-box{padding:16px 10px 16px 22px!important}
+#peta .hud-box .hud-h{margin:0 0 14px!important;padding-bottom:6px!important}
+#peta .hud-scroll{padding:4px 14px 6px 0!important;margin-right:0!important;scrollbar-gutter:stable}
+#peta .hud-scroll .card:first-child{padding-top:2px!important}
+#peta .hud-scroll .card{margin:0 0 18px!important;padding:0 0 18px!important}
+#peta .hud-scroll .card b:first-child{margin-bottom:12px!important}
+#peta .hud-scroll .layer-grid{gap:4px 18px!important}
+#peta .hud-scroll details{margin-top:10px!important}
+#peta .hud-scroll summary{padding:10px 0!important}
+#peta .hud-box .hud-x{right:14px!important;top:14px!important}
+#peta .hud-box .hud-lebar{right:44px!important;top:14px!important}
+#peta .hud-right .hud-box{padding:16px 10px 16px 20px!important}
+#peta .hud-box .hud-h{padding-left:0!important;margin-left:0!important}
+#peta .hud-grow .hud-h{padding-left:0!important}
+
+/* ===== v5: tata letak Peta disederhanakan (hanya tampilan; semua fitur & kontrol tetap ada) ===== */
+/* 1. hilangkan hiasan: garis pindai & vinyet */
+#peta .hud-scan,#peta .hud-vignette{display:none!important}
+/* 2. dock bawah: lebih ramping, label tetap tampil (tetap terbaca bila font ikon gagal dimuat) */
+#peta .hud-dock{height:auto!important;padding:5px 8px!important;gap:2px!important;border-radius:16px!important;--dock-h:auto}
+#peta .hud-dock button{min-width:64px!important;padding:3px 6px!important;gap:3px!important}
+#peta .hud-dock button i{width:34px!important;height:26px!important}
+#peta .hud-dock button span{font-size:10.5px!important}
+/* 3. kartu lebih rata dan seragam */
+#peta .hud-box{border-radius:14px!important;padding:14px 14px 14px 18px!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#peta .hud-right .hud-box{padding:14px 14px 14px 18px!important}
+#peta .hud-left{gap:10px!important}
+/* 4. kontrol peta di sisi kanan tidak menumpuk: pemilih peta dasar hanya ikon (aktif menampilkan nama) */
+#peta .cp-base button span{display:none!important}#peta .cp-base button.on span{display:inline!important}
+/* 5. layar sempit: pencarian satu baris penuh, panel menumpuk di bawah, dock tetap di dasar */
+@media(max-width:700px){
+  #peta .hud-dock{left:8px!important;right:8px!important;transform:none!important;justify-content:space-between;overflow-x:auto;max-width:none}
+  #peta .hud-dock button{min-width:52px!important}#peta .hud-dock button span{font-size:9.5px!important}
+  #peta .hud-top{top:60px!important}
+  #peta .hud-title i{display:none}
+}

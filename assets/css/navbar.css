@@ -1,0 +1,292 @@
+/* =====================================================================
+   ECO-WAVE - Navbar baru (kaca + indikator aktif + dropdown + status langsung + menu ponsel)
+   Dimuat PALING AKHIR dari includes/head.php. Kelas baru "nv-*" (tidak bentrok dengan CSS lama .topnav).
+   ===================================================================== */
+:root{--nav-h:64px}
+body{padding-top:var(--nav-h)!important}
+body[data-page=beranda]{padding-top:0!important}
+#beranda.hero{padding-top:var(--nav-h)!important}
+
+.nv{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:9000;display:flex;align-items:center;gap:18px;
+  padding:0 clamp(14px,2.4vw,30px);color:var(--cream);font-family:var(--o-font,'Plus Jakarta Sans',system-ui,sans-serif);
+  background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.88),rgba(var(--space-cadet-rgb),.66));
+  -webkit-backdrop-filter:blur(3px) saturate(1.5);backdrop-filter:blur(3px) saturate(1.5);
+  border-bottom:1px solid rgba(var(--tan-rgb),.13);box-shadow:0 12px 32px -16px rgba(var(--space-cadet-rgb),.7);
+  transition:background .3s,box-shadow .3s,border-color .3s}
+.nv::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;pointer-events:none;opacity:.6;
+  background:linear-gradient(90deg,transparent,rgba(var(--tan-rgb),.75) 30%,rgba(var(--tan-rgb),.6) 70%,transparent)}
+/* beranda: transparan di atas video, jadi kaca setelah di-scroll */
+body[data-page=beranda] .nv{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.72),rgba(var(--space-cadet-rgb),0));box-shadow:none;border-bottom-color:transparent;
+  -webkit-backdrop-filter:none;backdrop-filter:none}
+body[data-page=beranda] .nv::after{opacity:0}
+body[data-page=beranda].nav-solid .nv{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.88),rgba(var(--space-cadet-rgb),.66));box-shadow:0 12px 32px -16px rgba(var(--space-cadet-rgb),.7);
+  border-bottom-color:rgba(var(--tan-rgb),.13);-webkit-backdrop-filter:blur(3px) saturate(1.5);backdrop-filter:blur(3px) saturate(1.5)}
+body[data-page=beranda].nav-solid .nv::after{opacity:.6}
+
+/* merek */
+.nv-brand{display:flex;align-items:center;gap:11px;flex:none;text-decoration:none;color:var(--cream)}
+.nv-brand svg{filter:drop-shadow(0 0 10px rgba(var(--tan-rgb),.35));transition:transform .4s}
+.nv-brand:hover svg{transform:rotate(-8deg) scale(1.06)}
+.nv-brand b{display:block;font-size:18px;font-weight:800;letter-spacing:.14em;line-height:1}
+.nv-brand small{display:block;margin-top:4px;font-size:10.5px;font-weight:600;letter-spacing:.04em;color:var(--cream);white-space:nowrap}
+
+/* tautan utama */
+.nv-links{display:flex;align-items:center;gap:3px;margin:0 auto;padding:4px;border-radius:999px;background:rgba(var(--cream-rgb),.045);border:1px solid rgba(var(--cream-rgb),.08)}
+.nv-links>a,.nv-dd>button{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border:0;border-radius:999px;background:transparent;cursor:pointer;
+  font:700 13px/1 var(--o-font,inherit);color:var(--cream);text-decoration:none;white-space:nowrap;transition:background .2s,color .2s,box-shadow .2s}
+.nv-links i{font-size:14px;color:var(--tan);transition:color .2s}
+.nv-links>a:hover,.nv-dd>button:hover,.nv-dd.open>button{background:rgba(var(--cream-rgb),.09);color:var(--cream)}
+.nv-links>a:hover i,.nv-dd>button:hover i{color:var(--tan)}
+.nv-links>a.on,.nv-dd.on>button{color:var(--cream);background:linear-gradient(135deg,rgba(var(--tan-rgb),.26),rgba(var(--tan-rgb),.24));
+  box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.5),0 0 20px rgba(var(--tan-rgb),.18)}
+.nv-links>a.on i,.nv-dd.on>button i{color:var(--tan)}
+.nv-caret{font-size:10px!important;margin-left:-2px;transition:transform .25s}
+.nv-dd.open .nv-caret{transform:rotate(180deg)}
+
+/* dropdown */
+.nv-dd{position:relative}
+.nv-menu{position:absolute;top:calc(100% + 12px);left:50%;min-width:300px;padding:8px;border-radius:18px;transform:translate(-50%,-6px);opacity:0;visibility:hidden;
+  background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.97),rgba(var(--space-cadet-rgb),.98));border:1px solid rgba(var(--tan-rgb),.28);
+  box-shadow:0 24px 60px rgba(var(--space-cadet-rgb),.6),0 0 40px rgba(var(--tan-rgb),.12);transition:opacity .2s,transform .2s,visibility .2s}
+.nv-menu::before{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);background:var(--slate-gray);border-left:1px solid rgba(var(--tan-rgb),.28);border-top:1px solid rgba(var(--tan-rgb),.28)}
+.nv-menu::after{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}   /* jembatan hover */
+.nv-dd.open .nv-menu{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.nv-menu a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--cream);transition:background .18s}
+.nv-menu a:hover{background:rgba(var(--tan-rgb),.12)}
+.nv-menu a.on{background:rgba(var(--tan-rgb),.18);box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.35)}
+.nv-menu a>i{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:10px;font-size:16px;color:var(--tan);background:rgba(var(--tan-rgb),.12)}
+.nv-menu a b{display:block;font-size:13.5px;font-weight:800}
+.nv-menu a span{display:block;margin-top:2px;font-size:11.5px;line-height:1.35;color:var(--cream)}
+.nv-menu .nv-badge{margin-left:auto;flex:none;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--space-cadet);background:var(--o-bolt-grad,var(--tan))}
+
+/* kanan */
+.nv-right{display:flex;align-items:center;gap:10px;flex:none}
+.nv-live{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;color:var(--cream);text-decoration:none;
+  background:rgba(var(--tan-rgb),.09);border:1px solid rgba(var(--tan-rgb),.32);white-space:nowrap;transition:background .2s}
+.nv-live:hover{background:rgba(var(--tan-rgb),.18)}
+.nv-live i{width:7px;height:7px;border-radius:50%;background:var(--tan);box-shadow:0 0 0 0 rgba(var(--tan-rgb),.6);animation:nv-denyut 2s infinite}
+.nv-live.off i{background:var(--tan);animation:none}
+.nv-live.sim i{background:var(--tan);animation:none}
+.nv-live em{font-style:normal;color:var(--cream);font-weight:600}
+@keyframes nv-denyut{0%{box-shadow:0 0 0 0 rgba(var(--tan-rgb),.55)}70%{box-shadow:0 0 0 8px rgba(var(--tan-rgb),0)}100%{box-shadow:0 0 0 0 rgba(var(--tan-rgb),0)}}
+.nv-jam{font-size:12px;font-weight:600;color:var(--cream);white-space:nowrap;font-variant-numeric:tabular-nums}
+.nv-cta{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font:800 13px/1 var(--o-font,inherit);text-decoration:none;white-space:nowrap;
+  color:var(--space-cadet);background:linear-gradient(135deg,var(--tan),var(--tan));box-shadow:0 8px 22px -8px rgba(var(--tan-rgb),.7);transition:transform .2s,box-shadow .2s}
+.nv-cta:hover{transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(var(--tan-rgb),.9)}
+.nv-btn{display:inline-flex;align-items:center;gap:8px;max-width:190px;padding:8px 14px;border-radius:999px;cursor:pointer;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font:700 12.5px/1 var(--o-font,inherit);color:var(--cream);background:rgba(var(--cream-rgb),.08);border:1px solid rgba(var(--cream-rgb),.22);transition:background .2s}
+.nv-btn:hover{background:rgba(var(--cream-rgb),.17)}
+.nv-av{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:800;color:var(--space-cadet);background:var(--o-bolt-grad,var(--tan))}
+
+/* hamburger */
+.nv-burger{display:none;position:relative;width:40px;height:40px;flex:none;margin-left:auto;border-radius:12px;cursor:pointer;background:rgba(var(--cream-rgb),.07);border:1px solid rgba(var(--cream-rgb),.18)}
+.nv-burger span{position:absolute;left:11px;right:11px;height:2px;border-radius:2px;background:var(--cream);transition:transform .25s,opacity .2s,top .25s}
+.nv-burger span:nth-child(1){top:13px}.nv-burger span:nth-child(2){top:19px}.nv-burger span:nth-child(3){top:25px}
+.nv-open .nv-burger span:nth-child(1){top:19px;transform:rotate(45deg)}
+.nv-open .nv-burger span:nth-child(2){opacity:0}
+.nv-open .nv-burger span:nth-child(3){top:19px;transform:rotate(-45deg)}
+
+@media(max-width:1180px){.nv-jam{display:none}.nv-brand small{display:none}}
+@media(max-width:1060px){.nv-live em{display:none}.nv-cta{display:none}.nv-links>a,.nv-dd>button{padding:8px 11px}}
+@media(max-width:940px){
+  :root{--nav-h:60px}
+  .nv{gap:10px}
+  .nv-burger{display:block}
+  .nv-right{margin-left:0}.nv-live{display:none}
+  .nv-links{position:fixed;top:var(--nav-h);left:0;right:0;max-height:calc(100dvh - var(--nav-h));overflow:auto;margin:0;padding:12px 14px 18px;border-radius:0 0 22px 22px;
+    flex-direction:column;align-items:stretch;gap:4px;background:rgba(var(--space-cadet-rgb),.97);border:0;border-bottom:1px solid rgba(var(--tan-rgb),.25);
+    box-shadow:0 30px 60px rgba(var(--space-cadet-rgb),.6);opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .22s,transform .22s}
+  .nv-open .nv-links{opacity:1;pointer-events:auto;transform:none}
+  .nv-links>a,.nv-dd>button{width:100%;padding:13px 14px;font-size:14px;border-radius:14px;justify-content:flex-start}
+  .nv-dd{display:block}.nv-dd>button .nv-caret{margin-left:auto}
+  .nv-menu{position:static;min-width:0;margin:2px 0 6px 10px;padding:4px;transform:none;opacity:1;visibility:visible;display:none;box-shadow:none;border-radius:14px;background:rgba(var(--cream-rgb),.04)}
+  .nv-menu::before,.nv-menu::after{display:none}
+  .nv-dd.open .nv-menu{display:block;transform:none}
+  .nv-btn{max-width:130px;padding:8px 11px}
+}
+@media(max-width:420px){.nv-btn span.nv-nama{display:none}}
+@media(prefers-reduced-motion:reduce){.nv *,.nv::after{animation:none!important;transition:none!important}}
+
+/* ---------- modal login ---------- */
+#loginModal{display:none;position:fixed;inset:0;z-index:9500;align-items:center;justify-content:center;padding:16px;background:rgba(var(--space-cadet-rgb),.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#loginModal.is-open{display:flex}
+#loginModal .modal-box{position:relative;width:100%;max-width:400px;padding:26px;border-radius:22px;color:var(--cream);
+  background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.98),rgba(var(--space-cadet-rgb),.99));border:1px solid rgba(var(--tan-rgb),.3);box-shadow:0 30px 80px rgba(var(--space-cadet-rgb),.65),0 0 50px rgba(var(--tan-rgb),.14)}
+#loginModal h3{margin:0 0 4px;font-size:20px;font-weight:800}
+#loginModal .lm-sub{margin:0 0 16px;font-size:13px;color:var(--cream)}
+#loginModal .lm-x{position:absolute;right:12px;top:12px;width:32px;height:32px;border-radius:10px;border:0;cursor:pointer;font-size:20px;line-height:1;color:var(--cream);background:rgba(var(--cream-rgb),.07)}
+#loginModal .lm-x:hover{background:rgba(var(--cream-rgb),.16);color:var(--cream)}
+#loginModal input{width:100%;box-sizing:border-box;margin:0 0 10px;padding:11px 13px;border-radius:12px;border:1px solid rgba(var(--tan-rgb),.28);background:var(--space-cadet);color:var(--cream);font:inherit;font-size:14px}
+#loginModal input:focus{outline:0;border-color:var(--tan);box-shadow:0 0 0 3px rgba(var(--tan-rgb),.2)}
+#loginModal .btn-login{width:100%;padding:12px;border:0;border-radius:12px;cursor:pointer;font:800 14px/1 inherit;color:var(--space-cadet);background:linear-gradient(135deg,var(--tan),var(--tan))}
+#loginModal .lm-msg{margin:0 0 12px;padding:9px 12px;border-radius:10px;font-size:13px;background:rgba(var(--tan-rgb),.12);border:1px solid rgba(var(--tan-rgb),.4);color:var(--cream)}
+#loginModal .lm-hint{margin:12px 0 0;font-size:12px;color:var(--cream)}
+#loginModal .lm-hint a{color:var(--tan)}
+
+/* =====================================================================
+   TEMA TENANG (menimpa gaya sebelumnya): solid, rapi, tanpa neon/glow/gradien aksen. Palet laut: biru tua + putih + satu aksen hangat.
+   ===================================================================== */
+.nv{background:rgba(var(--space-cadet-rgb),.94);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border-bottom:1px solid rgba(var(--cream-rgb),.09);box-shadow:0 2px 14px rgba(var(--space-cadet-rgb),.28)}
+.nv::after{display:none}
+body[data-page=beranda] .nv{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.68),rgba(var(--space-cadet-rgb),0));border-bottom-color:transparent;box-shadow:none}
+body[data-page=beranda].nav-solid .nv{background:rgba(var(--space-cadet-rgb),.94);border-bottom-color:rgba(var(--cream-rgb),.09);box-shadow:0 2px 14px rgba(var(--space-cadet-rgb),.28)}
+.nv-brand svg{filter:none}.nv-brand b{font-size:17px;letter-spacing:.1em}.nv-brand small{color:var(--tan)}
+.nv-links{background:transparent;border:0;padding:0;gap:2px}
+.nv-links>a,.nv-dd>button{font-weight:600;color:var(--cream);padding:9px 14px;border-radius:10px}
+.nv-links i{color:var(--tan)}
+.nv-links>a:hover,.nv-dd>button:hover,.nv-dd.open>button{background:rgba(var(--cream-rgb),.08);color:var(--cream)}
+.nv-links>a:hover i,.nv-dd>button:hover i{color:var(--cream)}
+.nv-links>a.on,.nv-dd.on>button{background:rgba(var(--cream-rgb),.12);color:var(--cream);box-shadow:inset 0 -2px 0 var(--tan)}
+.nv-links>a.on i,.nv-dd.on>button i{color:var(--tan)}
+.nv-menu{background:var(--space-cadet);border:1px solid rgba(var(--cream-rgb),.12);border-radius:14px;box-shadow:0 18px 40px rgba(var(--space-cadet-rgb),.45)}
+.nv-menu::before{background:var(--space-cadet);border-color:rgba(var(--cream-rgb),.12)}
+.nv-menu a:hover{background:rgba(var(--cream-rgb),.07)}.nv-menu a.on{background:rgba(var(--cream-rgb),.1);box-shadow:none}
+.nv-menu a>i{color:var(--tan);background:rgba(var(--tan-rgb),.12);border-radius:10px}
+.nv-live{background:rgba(var(--cream-rgb),.06);border:1px solid rgba(var(--cream-rgb),.14);color:var(--cream);font-weight:600}
+.nv-live:hover{background:rgba(var(--cream-rgb),.12)}
+.nv-live i{background:var(--tan);box-shadow:none;animation:none}
+.nv-live.off i{background:var(--tan)}.nv-live.sim i{background:var(--tan)}
+.nv-jam{color:var(--cream);font-weight:600;min-width:64px;text-align:right}
+.nv-btn{background:var(--cream);color:var(--space-cadet);border:0;font-weight:700}.nv-btn:hover{background:var(--cream)}
+.nv-av{background:var(--tan);color:var(--space-cadet)}
+.nv-burger{background:rgba(var(--cream-rgb),.08);border-color:rgba(var(--cream-rgb),.18)}
+#loginModal{background:rgba(var(--space-cadet-rgb),.7)}
+#loginModal .modal-box{background:var(--space-cadet);border:1px solid rgba(var(--cream-rgb),.14);box-shadow:0 24px 60px rgba(var(--space-cadet-rgb),.55)}
+#loginModal input{background:var(--space-cadet);border-color:rgba(var(--cream-rgb),.16)}#loginModal input:focus{border-color:var(--tan);box-shadow:0 0 0 3px rgba(var(--tan-rgb),.22)}
+#loginModal .btn-login{background:var(--tan);color:var(--space-cadet)}
+/* agar kanan atas tidak terpotong: ikon tautan disembunyikan di layar menengah, merek ringkas */
+@media(max-width:1400px){.nv-links>a i:not(.nv-caret),.nv-dd>button>i:first-child{display:none}.nv-brand small{display:none}}
+@media(max-width:1180px){.nv-jam{display:none}}
+@media(max-width:940px){.nv-links>a i:not(.nv-caret),.nv-dd>button>i:first-child{display:inline}.nv-links{background:var(--space-cadet)}.nv-menu{background:rgba(var(--cream-rgb),.05)}}
+/* latar video laut: warna alami, hanya digelapkan agar teks terbaca */
+#bgVideo{background:var(--space-cadet)}
+#bgVideo video{filter:saturate(1) brightness(.9) contrast(1.02)!important}
+#bgVideo .bgv-tint{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.62),rgba(var(--space-cadet-rgb),.36) 32%,rgba(var(--space-cadet-rgb),.5) 68%,rgba(var(--space-cadet-rgb),.82))!important}
+
+/* =====================================================================
+   NAVBAR KACA (glassmorphism) - menimpa tema tenang di atas.
+   Translusen + blur kuat, tepi atas bercahaya, grup tautan berbentuk kapsul kaca.
+   Tetap rapi: tinggi tetap, satu baris, semua kontrol sama tinggi (36px).
+   ===================================================================== */
+.nv,body[data-page=beranda].nav-solid .nv{
+  background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.72),rgba(var(--space-cadet-rgb),.58));
+  -webkit-backdrop-filter:blur(3px) saturate(1.35);backdrop-filter:blur(3px) saturate(1.35);
+  border-bottom:1px solid rgba(var(--cream-rgb),.14);
+  box-shadow:inset 0 1px 0 rgba(var(--cream-rgb),.1),0 8px 24px -14px rgba(var(--space-cadet-rgb),.6);
+}
+/* kilau tipis di tepi bawah */
+.nv::after,body[data-page=beranda].nav-solid .nv::after{display:block;opacity:.7;height:1px;bottom:-1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--cream-rgb),.3) 50%,transparent)}
+body[data-page=beranda] .nv{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.55),rgba(var(--space-cadet-rgb),0));-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;border-bottom-color:transparent}
+body[data-page=beranda] .nv::after{opacity:0}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nv,body[data-page=beranda].nav-solid .nv{background:rgba(var(--space-cadet-rgb),.94)}
+}
+
+/* tautan: kapsul kaca */
+.nv-links{padding:4px;gap:2px;border-radius:999px;background:rgba(var(--cream-rgb),.05);border:1px solid rgba(var(--cream-rgb),.12)}
+.nv-links>a,.nv-dd>button{height:36px;padding:0 15px;border-radius:999px;font-weight:600;color:var(--cream)}
+.nv-links>a:hover,.nv-dd>button:hover,.nv-dd.open>button{background:rgba(var(--cream-rgb),.13);color:var(--cream)}
+.nv-links>a.on,.nv-dd.on>button{background:rgba(var(--cream-rgb),.16);color:var(--cream);
+  box-shadow:inset 0 0 0 1px rgba(var(--cream-rgb),.2),inset 0 -2px 0 var(--tan)}
+
+/* kanan: semua kontrol setinggi 36px, kaca */
+.nv-live,.nv-btn{height:36px;box-sizing:border-box;padding:0 14px;border-radius:999px}
+.nv-live{background:rgba(var(--cream-rgb),.07);border:1px solid rgba(var(--cream-rgb),.16)}
+.nv-live:hover{background:rgba(var(--cream-rgb),.17)}
+.nv-btn{background:rgba(var(--cream-rgb),.92);color:var(--space-cadet);box-shadow:0 4px 14px rgba(var(--space-cadet-rgb),.25),inset 0 1px 0 var(--cream)}
+.nv-btn:hover{background:var(--cream)}
+.nv-jam{color:var(--cream)}
+.nv-burger{background:rgba(var(--cream-rgb),.1);border-color:rgba(var(--cream-rgb),.2)}
+
+/* dropdown ikut kaca */
+.nv-menu{background:rgba(var(--space-cadet-rgb),.92);-webkit-backdrop-filter:blur(3px) saturate(1.3);backdrop-filter:blur(3px) saturate(1.3);
+  border:1px solid rgba(var(--cream-rgb),.2);box-shadow:inset 0 1px 0 rgba(var(--cream-rgb),.15),0 22px 50px rgba(var(--space-cadet-rgb),.5)}
+.nv-menu::before{background:rgba(var(--space-cadet-rgb),.95);border-color:rgba(var(--cream-rgb),.2)}
+
+/* teks status "(cache)" disembunyikan di layar menengah agar bar tidak sesak */
+@media(max-width:1360px){.nv-live em{display:none}}
+@media(max-width:940px){
+  .nv-links{border-radius:0 0 22px 22px;background:rgba(var(--space-cadet-rgb),.94);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+    border:0;border-bottom:1px solid rgba(var(--cream-rgb),.2)}
+  .nv-links{padding:12px 14px 18px;gap:4px}
+  .nv-links>a,.nv-dd>button{height:auto;padding:13px 14px;border-radius:14px}
+}
+
+/* =====================================================================
+   REVISI v5: navbar tanpa warna oranye & tanpa blur
+   - Latar navbar & dropdown: biru laut tua solid-transparan, TANPA backdrop blur (video di belakang tetap tajam).
+   - Penanda halaman aktif, ikon, avatar, dan tombol login memakai putih/cyan, bukan oranye.
+   ===================================================================== */
+.nv,body[data-page=beranda].nav-solid .nv{
+  background:rgba(var(--space-cadet-rgb),.9);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  border-bottom:1px solid rgba(var(--cream-rgb),.12);
+  box-shadow:0 2px 12px rgba(var(--space-cadet-rgb),.3);
+}
+.nv::after,body[data-page=beranda].nav-solid .nv::after{display:none}
+body[data-page=beranda] .nv{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.7),rgba(var(--space-cadet-rgb),0));box-shadow:none;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+
+.nv-links{background:rgba(var(--cream-rgb),.05);border-color:rgba(var(--cream-rgb),.1)}
+.nv-links>a.on,.nv-dd.on>button{
+  background:rgba(var(--tan-rgb),.16);color:var(--cream);
+  box-shadow:inset 0 0 0 1px rgba(var(--tan-rgb),.45);
+}
+.nv-links>a.on i,.nv-dd.on>button i{color:var(--tan)}
+.nv-links>a:hover i,.nv-dd>button:hover i{color:var(--tan)}
+
+.nv-menu{background:var(--space-cadet);-webkit-backdrop-filter:none;backdrop-filter:none;border:1px solid rgba(var(--cream-rgb),.16);box-shadow:0 18px 40px rgba(var(--space-cadet-rgb),.5)}
+.nv-menu::before{background:var(--space-cadet);border-color:rgba(var(--cream-rgb),.16)}
+.nv-menu a>i{color:var(--tan);background:rgba(var(--tan-rgb),.12)}
+.nv-menu a.on{background:rgba(var(--tan-rgb),.14)}
+
+.nv-live.sim i{background:var(--tan)}
+.nv-av{background:var(--tan);color:var(--space-cadet)}
+.nv-btn{background:var(--cream);color:var(--space-cadet)}
+#loginModal{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(var(--space-cadet-rgb),.78)}
+#loginModal .modal-box{-webkit-backdrop-filter:none;backdrop-filter:none}
+#loginModal .btn-login{background:var(--tan);color:var(--space-cadet)}
+#loginModal input:focus{border-color:var(--tan);box-shadow:0 0 0 3px rgba(var(--tan-rgb),.22)}
+
+@media(max-width:940px){
+  .nv-links{background:var(--space-cadet);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .nv-menu{background:rgba(var(--cream-rgb),.05)}
+}
+/* jangkar: loncatan #id tidak tertutup navbar */
+html{scroll-padding-top:calc(var(--nav-h,64px) + 16px)}
+
+/* sorotan sesaat saat membuka tautan langsung (deeplink.js) */
+.dl-sorot{animation:dlSorot 2.2s ease-out}
+@keyframes dlSorot{0%,30%{box-shadow:0 0 0 3px rgba(var(--tan-rgb),.85)}100%{box-shadow:0 0 0 3px rgba(var(--tan-rgb),0)}}
+
+/* ===== v7: navbar rapi (tombol alat dikelompokkan, tidak ada yang terpotong) ===== */
+.nv{gap:14px}
+.nv-links{flex:0 1 auto}
+.nv-links>a,.nv-dd>button{padding:0 12px;white-space:nowrap}
+.nv-right{flex:none;gap:8px;align-items:center}
+.nv-live,.nv-btn,.nv-tools{height:36px;box-sizing:border-box}
+.nv-live{padding:0 12px;white-space:nowrap}
+.nv-tools{display:inline-flex;align-items:center;gap:2px;padding:2px;border-radius:999px;background:rgba(var(--cream-rgb),.07);border:1px solid rgba(var(--cream-rgb),.16)}
+.nv-tools .nv-cari,.nv-tools .nv-aks{display:grid;place-items:center;width:30px;height:30px;padding:0;margin:0;border:0;border-radius:50%;background:transparent;color:var(--cream);font-size:15px;line-height:0;cursor:pointer;transition:background .2s,color .2s}
+.nv-tools .nv-cari:hover,.nv-tools .nv-aks:hover,.nv-tools .nv-aks[aria-expanded="true"]{background:rgba(var(--cream-rgb),.18);color:var(--cream)}
+.nv-tools .nv-cari .nv-cari-t,.nv-tools .nv-cari kbd{display:none}
+.nv-tools svg,.nv-tools i{display:block}
+.nv-jam{white-space:nowrap}
+@media(min-width:941px){
+  .nv-btn{flex:none;max-width:none!important;overflow:visible!important;text-overflow:clip!important}
+  .nv-btn .nv-nama{white-space:nowrap}
+}
+@media(max-width:1700px){.nv-jam{display:none}}
+@media(max-width:1560px) and (min-width:941px){.nv-live{display:none}}
+@media(max-width:1300px) and (min-width:941px){.nv-av+.nv-nama{display:none}.nv-btn:has(.nv-av){width:36px;padding:0;justify-content:center;gap:0}}
+@media(max-width:1100px) and (min-width:941px){.nv-links>a,.nv-dd>button{padding:0 9px}.nv{gap:10px}.nv-brand b{letter-spacing:.08em}}
+
+
+/* pilihan "Masuk sebagai" di modal login */
+#loginModal .lm-peran{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+#loginModal .lm-peran>span{grid-column:1/-1;font-size:12.5px;color:var(--cream)}
+#loginModal .lm-peran label{position:relative;cursor:pointer;margin:0}
+#loginModal .lm-peran input{position:absolute;opacity:0;width:0;height:0;margin:0;padding:0}
+#loginModal .lm-peran b{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:12px;font-size:13.5px;font-weight:700;color:var(--cream);background:var(--space-cadet);border:1px solid rgba(var(--cream-rgb),.16);transition:.15s}
+#loginModal .lm-peran input:checked+b{color:var(--space-cadet);background:var(--tan);border-color:var(--tan)}
+#loginModal .lm-peran input:focus-visible+b{box-shadow:0 0 0 3px rgba(var(--tan-rgb),.35)}

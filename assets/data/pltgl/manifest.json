@@ -1,0 +1,67 @@
+{
+ "bbox_studi": [
+  104.5,
+  -8.0,
+  107.0,
+  -6.0
+ ],
+ "sumber": "/home/claude/p/data/Data PLTGL",
+ "catatan": "Disederhanakan untuk web; berkas asli ada di 01_raw/Data_PLTGL.",
+ "layer": {
+  "mangrove": {
+   "file": "mangrove.geojson",
+   "fitur": 247,
+   "kb": 206.7
+  },
+  "karang": {
+   "file": "karang.geojson",
+   "fitur": 1325,
+   "kb": 725.9
+  },
+  "lamun": {
+   "file": "lamun.geojson",
+   "fitur": 720,
+   "kb": 243.5
+  },
+  "reef": {
+   "file": "reef.geojson",
+   "fitur": 155,
+   "kb": 161.8
+  },
+  "konservasi": {
+   "file": "konservasi.geojson",
+   "fitur": 67,
+   "kb": 280.2
+  },
+  "batimetri": {
+   "file": "batimetri.geojson",
+   "fitur": 119,
+   "kb": 31.3
+  },
+  "perairan5km": {
+   "file": "perairan5km.geojson",
+   "fitur": 14,
+   "kb": 16.0
+  },
+  "pelabuhan": {
+   "file": "pelabuhan.geojson",
+   "fitur": 1,
+   "kb": 0.2
+  },
+  "gardu": {
+   "file": "gardu.geojson",
+   "fitur": 1,
+   "kb": 0.2
+  },
+  "jalur_listrik": {
+   "file": "jalur_listrik.geojson",
+   "fitur": 149,
+   "kb": 23.3
+  },
+  "jalur_pelayaran": {
+   "file": "jalur_pelayaran.geojson",
+   "fitur": 24,
+   "kb": 8.3
+  }
+ }
+}

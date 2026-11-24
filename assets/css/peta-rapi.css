@@ -1,0 +1,192 @@
+/* =====================================================================
+   ECO-WAVE - peta.php: TATA LETAK FINAL (dimuat paling akhir, menimpa tumpukan aturan lama)
+   Satu sistem zona, semua posisi dihitung dari variabel yang sama:
+
+     y0 ........ baris atas   : [judul] ........ [peta dasar + legenda] ........ [chip status]
+     y1 ........ area kerja   : panel kiri | kontrol zoom ........ | panel kanan
+     bawah ..... dock di tengah, koordinat/skala di kiri, atribusi di dasar
+
+   Peta tetap memenuhi layar di bawah navbar kaca (supaya efek kaca terlihat).
+   ===================================================================== */
+
+body[data-page=peta]{
+  --gap:12px;
+  --wl:clamp(290px,23vw,370px);        /* panel kiri */
+  --wr:clamp(280px,22vw,350px);        /* panel kanan */
+  --row:40px;                           /* tinggi baris atas */
+  --ctl:40px;                           /* ukuran tombol kontrol peta (zoom, aksi) */
+  --dock-h:64px;
+  --dock-b:22px;                        /* jarak dock dari dasar (atribusi di bawahnya) */
+  --y0:calc(var(--nav-h,64px) + var(--gap));
+  --y1:calc(var(--y0) + var(--row) + var(--gap));
+  --yb:calc(var(--dock-b) + var(--dock-h) + var(--gap));
+  --kaca:rgba(var(--space-cadet-rgb),.64);
+  --kaca-garis:rgba(var(--cream-rgb),.15);
+  --kaca-blur:blur(3px) saturate(1.3);
+}
+/* HARUS di elemen .hud sendiri: peta-lega.css mendefinisikan --hud-wl pada .hud dan akan menang atas variabel di body */
+body[data-page=peta] .hud{--hud-wl:var(--wl);--hud-wr:var(--wr);--hud-w:var(--wl)}
+body[data-page=peta] .hud.lebar{--hud-wl:clamp(440px,38vw,640px)}
+body[data-page=peta] .hud.panels-off{--chip-w:240px}
+
+/* ---------- kanvas ---------- */
+body[data-page=peta] .hud{top:0!important;bottom:0!important;height:auto!important}
+.hud-vignette{background:linear-gradient(180deg,rgba(var(--space-cadet-rgb),.5),transparent 16%,transparent 80%,rgba(var(--space-cadet-rgb),.45))!important}
+
+/* ---------- baris atas ---------- */
+.hud-top{position:absolute!important;top:var(--y0)!important;left:var(--gap)!important;right:var(--gap)!important;height:var(--row)!important;
+  display:flex!important;align-items:center;justify-content:space-between;gap:var(--gap);padding:0!important;margin:0!important;
+  background:none!important;border:0!important;pointer-events:none;z-index:600}
+.hud-top .hud-title{pointer-events:auto;box-sizing:border-box;width:var(--hud-wl);height:100%!important;margin:0!important;padding:0 16px!important;
+  display:flex!important;flex-direction:row!important;align-items:baseline;justify-content:flex-start!important;gap:10px;text-align:left;overflow:hidden;white-space:nowrap;
+  background:var(--kaca)!important;border:1px solid var(--kaca-garis)!important;border-radius:999px!important;clip-path:none!important;filter:none!important;
+  -webkit-backdrop-filter:var(--kaca-blur);backdrop-filter:var(--kaca-blur);box-shadow:0 8px 24px rgba(var(--space-cadet-rgb),.35),inset 0 1px 0 rgba(var(--cream-rgb),.12)!important;
+  align-items:center!important;transition:width .3s ease}
+.hud-top .hud-title b{background:none!important;-webkit-text-fill-color:var(--cream);color:var(--cream)!important;font:700 14.5px/1 'Plus Jakarta Sans',system-ui,sans-serif!important;letter-spacing:.01em!important;text-shadow:none!important;padding:0!important;flex:none}
+.hud-top .hud-title i{font:500 11.5px/1 'Inter',system-ui,sans-serif!important;letter-spacing:0!important;color:var(--cream)!important;margin:0!important;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hud-top-r{pointer-events:auto;display:flex!important;align-items:center;justify-content:flex-end;gap:6px!important;flex:none;height:100%!important;margin:0!important;padding:0!important;
+  background:none!important;border:0!important;box-shadow:none!important;text-shadow:none!important;white-space:nowrap}
+.hud-top-r span{display:inline-flex;align-items:center;height:30px;padding:0 12px!important;border-radius:999px;font:600 11.5px/1 'Inter',system-ui,sans-serif!important;letter-spacing:0!important;color:var(--cream)!important;
+  background:var(--kaca);border:1px solid var(--kaca-garis);-webkit-backdrop-filter:var(--kaca-blur);backdrop-filter:var(--kaca-blur);font-variant-numeric:tabular-nums}
+.hud-top-r .demo{color:var(--space-cadet)!important;background:var(--acc,var(--tan))!important;border-color:transparent!important;font-weight:800!important}
+#hudClock{display:none!important}                                /* jam sudah ada di navbar */
+@media(min-width:1500px){#hudClock{display:inline-flex!important}}
+
+/* ---------- panel kiri & kanan ---------- */
+.hud-panel{top:var(--y1)!important;bottom:var(--yb)!important;gap:var(--gap)!important;z-index:500}
+.hud-left{left:var(--gap)!important;width:var(--hud-wl)!important}
+.hud-right{right:var(--gap)!important;width:var(--hud-wr)!important;padding-right:2px;scrollbar-width:thin;scrollbar-color:rgba(var(--cream-rgb),.28) transparent}
+.hud-right::-webkit-scrollbar,.hud-scroll::-webkit-scrollbar{width:6px}
+.hud-right::-webkit-scrollbar-thumb,.hud-scroll::-webkit-scrollbar-thumb{background:rgba(var(--cream-rgb),.25);border-radius:6px}
+.hud-right::-webkit-scrollbar-track,.hud-scroll::-webkit-scrollbar-track{background:transparent}
+.hud-scroll{scrollbar-color:rgba(var(--cream-rgb),.28) transparent!important}
+
+.hud .hud-box{box-sizing:border-box;padding:12px 14px 14px!important;border-radius:18px!important;
+  background:var(--kaca)!important;border:1px solid var(--kaca-garis)!important;
+  -webkit-backdrop-filter:var(--kaca-blur)!important;backdrop-filter:var(--kaca-blur)!important;
+  box-shadow:0 10px 28px rgba(var(--space-cadet-rgb),.35),inset 0 1px 0 rgba(var(--cream-rgb),.1)!important}
+.hud-box .hud-h{display:flex;align-items:center;gap:8px;min-height:26px;margin:0 0 10px!important;padding:0 130px 8px 0!important;
+  font:700 13.5px/1.2 'Plus Jakarta Sans',system-ui,sans-serif!important;letter-spacing:.01em!important;text-transform:none!important;color:var(--cream)!important;
+  border-bottom:1px solid rgba(var(--cream-rgb),.12);background:none!important;white-space:nowrap;overflow:hidden}
+.hud-right .hud-box .hud-h{padding-right:34px!important}
+.hud-left .hud-box:first-child .hud-h{padding-right:34px!important}
+.hud-box .hud-x{top:10px!important;right:10px!important;width:24px!important;height:24px!important;font-size:16px!important}
+.hud-box .hud-lebar{top:10px!important;right:42px!important;height:24px!important;padding:0 10px!important;font-size:11px!important}
+
+/* kotak pencarian: ringkas, tombol aksi satu baris yang bisa digeser */
+.hud-left .hud-box:first-child input{height:38px;padding:0 14px!important;font-size:13px}
+.hud-left .hud-chips{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px!important;margin-top:8px!important}
+.hud-left .hud-chips .hud-btn{flex-direction:column;justify-content:center;gap:2px!important;min-height:44px;padding:5px 4px!important;font-size:11px!important;line-height:1.15;text-align:center;white-space:normal}
+.hud-left .hud-chips .hud-btn i{font-size:14px}
+@media(max-height:820px){.hud-left .hud-box:first-child .hud-chips{display:flex!important}}   /* batalkan aturan lama yang menyembunyikannya */
+
+/* isi panel kiri: kartu lebih rapat */
+.hud .card{padding:12px!important;margin-bottom:10px;font-size:13px;line-height:1.5}
+.hud .card>b{font-size:13.5px!important}
+.hud .text-xs{font-size:12px!important}
+.hud .table-wrap{max-height:min(40vh,360px)}
+.hud th,.hud td{padding:8px 10px!important}
+.hud .layer-grid{margin-top:8px}
+
+/* panel kanan: statistik lebih padat supaya muat tanpa terlalu banyak gulir */
+.hud-gauge{width:96px;height:96px}
+.g-txt b{font-size:20px}
+.g-txt span{max-width:58px;font-size:8.5px;letter-spacing:.02em;line-height:1.15;margin-top:3px}
+.hud-big b{font-size:26px}
+.hud-stats{margin-top:8px}
+.hud-right .hud-stats>div{padding:5px 8px;font-size:13px}
+.hud-cards3{margin-top:8px}
+.hud-right .hud-cards3>div{padding:5px 4px}
+.hud-right .hud-cards3 b{font-size:18px}
+.hud-box canvas{min-height:0!important}
+
+/* ---------- kontrol Leaflet ---------- */
+/* kiri-atas: zoom + aksi, sejajar puncak panel kiri, tepat di kanan panel */
+.hud .leaflet-top.leaflet-left{top:var(--y1)!important;left:calc(var(--gap)*2 + var(--hud-wl))!important;transition:left .3s ease}
+.hud.panels-off .leaflet-top.leaflet-left{left:var(--gap)!important}
+.hud .leaflet-top.leaflet-left .leaflet-control{margin:0 0 10px 0!important}
+
+/* kanan-atas: pemilih peta dasar sejajar baris judul, legenda tepat di bawahnya; berhenti sebelum panel kanan */
+.hud .leaflet-top.leaflet-right{top:var(--y0)!important;left:calc(var(--gap)*2 + var(--hud-wl))!important;right:calc(var(--gap)*2 + var(--hud-wr))!important;
+  display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}   /* menjangkau seluruh zona bebas di antara panel -> isi dipusatkan */
+.hud.panels-off .leaflet-top.leaflet-right{right:calc(var(--gap)*2 + var(--chip-w,240px))!important}
+.hud .leaflet-top.leaflet-right .leaflet-control{margin:0!important;float:none}
+
+/* kaca seragam untuk semua kontrol peta */
+.hud .cp-ctl,.hud .leaflet-bar{background:var(--kaca)!important;border:1px solid var(--kaca-garis)!important;border-radius:14px!important;
+  -webkit-backdrop-filter:var(--kaca-blur);backdrop-filter:var(--kaca-blur);box-shadow:0 8px 22px rgba(var(--space-cadet-rgb),.35)!important;overflow:hidden}
+.hud .leaflet-bar{width:var(--ctl);box-sizing:border-box}
+.hud .leaflet-bar a{position:relative;display:grid!important;place-items:center;box-sizing:border-box;width:calc(var(--ctl) - 2px)!important;height:var(--ctl)!important;padding:0;margin:0;line-height:1!important;font-size:17px;
+  border:0!important;border-radius:0!important;background:transparent!important;color:var(--cream)!important;text-indent:0;text-decoration:none}
+.hud .leaflet-bar a:not(:last-child){box-shadow:inset 0 -1px 0 rgba(var(--cream-rgb),.12)}   /* garis pemisah tidak memakan tinggi tombol -> ikon tepat di tengah */
+.hud .leaflet-bar a:hover{background:rgba(var(--cream-rgb),.16)!important;color:var(--cream)!important}
+/* + dan - digambar dengan CSS supaya persis di tengah (huruf font tidak pernah simetris) */
+.hud .leaflet-control-zoom a span{display:none!important}
+.hud .leaflet-control-zoom a::before,.hud .leaflet-control-zoom-in::after{content:"";position:absolute;left:50%;top:50%;border-radius:2px;background:currentColor;transform:translate(-50%,-50%)}
+.hud .leaflet-control-zoom a::before{width:14px;height:2px}
+.hud .leaflet-control-zoom-in::after{width:2px;height:14px}
+
+.hud .cp-base{display:flex;flex-wrap:nowrap;gap:2px;padding:3px!important;height:var(--row);box-sizing:border-box;align-items:center}
+.hud .cp-base button{height:32px;padding:0 11px;border-radius:11px;color:var(--cream)}
+.hud .cp-base button.on{background:var(--acc,var(--tan));color:var(--space-cadet);box-shadow:none}
+.hud .cp-base button span{display:none}.hud .cp-base button.on span{display:inline}
+
+.hud .cp-legenda{min-width:0;width:max-content;max-width:240px;padding:0!important}
+.hud .cp-legenda summary{height:34px;padding:0 14px;box-sizing:border-box;font-size:12.5px}
+.hud .cp-legenda[open]{padding-bottom:10px!important}
+.hud .cp-legenda[open]>*:not(summary){margin-left:14px;margin-right:14px}
+.hud .cp-legenda[open] .li:first-of-type{margin-top:8px}
+.hud .cp-legenda .li{font-size:12px}
+
+/* kiri-bawah: koordinat + skala, di sisi kiri dock */
+.hud .leaflet-bottom.leaflet-left{left:var(--gap)!important;bottom:6px!important}
+.hud .leaflet-bottom.leaflet-left .leaflet-control{margin:0 0 6px 0!important}
+.hud .cp-koord{height:30px;display:flex;align-items:center;padding:0 12px;font-size:11.5px}
+/* kanan-bawah: hanya atribusi, rapat ke dasar */
+.hud .leaflet-bottom.leaflet-right{right:0!important;bottom:0!important}
+.hud .leaflet-control-attribution{max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0!important;background:rgba(var(--space-cadet-rgb),.7)!important;color:var(--cream)!important;font-size:9.5px!important}
+
+/* ---------- dock ---------- */
+.hud-dock{left:50%;bottom:var(--dock-b)!important;height:var(--dock-h);box-sizing:border-box;align-items:center;gap:4px!important;padding:6px 12px!important;border-radius:20px!important;
+  background:var(--kaca)!important;border:1px solid var(--kaca-garis)!important;-webkit-backdrop-filter:var(--kaca-blur);backdrop-filter:var(--kaca-blur);
+  box-shadow:0 10px 28px rgba(var(--space-cadet-rgb),.4),inset 0 1px 0 rgba(var(--cream-rgb),.1)!important}
+.hud-dock{--dock-h:64px;gap:2px!important}
+.hud-dock button{min-width:78px!important;padding:0 6px!important;gap:4px!important;justify-content:center;color:var(--cream)}
+.hud-dock button span{display:block!important;font:600 10.5px/1.1 'Inter',system-ui,sans-serif;letter-spacing:0;text-transform:none;white-space:nowrap;color:inherit}
+.hud-dock button i{width:36px!important;height:28px!important;font-size:16px!important}
+.hud-dock button.on,.hud-dock button:hover{color:var(--cream)}
+
+/* ---------- kotak info hasil klik (di tengah, di antara kedua panel) ---------- */
+.hud-info{left:calc(var(--gap)*2 + var(--hud-wl))!important;right:calc(var(--gap)*2 + var(--hud-wr))!important;bottom:var(--yb)!important;
+  max-height:min(48%,380px)!important;padding:14px 18px!important;border-radius:18px!important;font-size:13px;line-height:1.55;
+  background:rgba(var(--space-cadet-rgb),.78)!important;-webkit-backdrop-filter:var(--kaca-blur);backdrop-filter:var(--kaca-blur)}
+.hud.panels-off .hud-info{left:var(--gap)!important;right:var(--gap)!important}
+
+/* ---------- penanda: desa di bawah penanda skor & label agar nama tidak tertutup titik biru ---------- */
+.leaflet-marker-icon.cp-desa-ic{z-index:250!important}
+.cp-nama{font-size:10.5px;padding:2px 8px;background:rgba(var(--space-cadet-rgb),.88);text-shadow:none}
+
+/* ---------- kartu detail titik (#detail): jadi kartu mengambang di kolom kanan, bukan laci setinggi layar ---------- */
+body[data-page=peta] #detail{top:var(--y1)!important;right:var(--gap)!important;bottom:var(--yb)!important;height:auto!important;width:var(--wr)!important;max-width:calc(100vw - 24px);
+  box-sizing:border-box;padding:16px!important;border-radius:18px;z-index:1500!important;transform:translateX(calc(100% + 40px));
+  background:rgba(var(--space-cadet-rgb),.9)!important;color:var(--cream)!important;border:1px solid var(--kaca-garis)!important;
+  -webkit-backdrop-filter:var(--kaca-blur);backdrop-filter:var(--kaca-blur);box-shadow:0 16px 40px rgba(var(--space-cadet-rgb),.5)!important}
+body[data-page=peta] #detail.open{transform:none}
+body[data-page=peta] #detail .btn,body[data-page=peta] #detail .btn2{flex:1;min-width:0;justify-content:center;text-align:center;font-size:12px;padding:.45rem .6rem!important}
+
+/* ---------- layar sempit/pendek ---------- */
+@media(max-width:1180px){.hud .cp-koord{display:none}}
+@media(max-width:1100px){body[data-page=peta]{--wl:280px;--wr:270px}}
+@media(max-height:640px){body[data-page=peta]{--dock-b:18px}}
+
+@media(max-width:900px){
+  body[data-page=peta]{--wl:auto;--wr:auto}
+  .hud-top{left:var(--gap)!important;right:var(--gap)!important}
+  .hud-top .hud-title{width:auto;flex:1;min-width:0}
+  .hud-top-r span:not(.demo){display:none}
+  .hud-panel{top:var(--y1)!important;bottom:calc(var(--yb) - 4px)!important;left:var(--gap)!important;right:var(--gap)!important;width:auto!important}
+  .hud .leaflet-top.leaflet-left{left:var(--gap)!important}
+  .hud .leaflet-top.leaflet-right{right:var(--gap)!important;top:calc(var(--y1) - 4px)!important}
+  .hud-info{left:var(--gap)!important;right:var(--gap)!important}
+  body[data-page=peta] #detail{left:var(--gap);width:auto!important}
+}

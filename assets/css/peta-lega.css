@@ -1,0 +1,122 @@
+/* =====================================================================
+   ECO-WAVE - peta.php: ruang baca yang lebih lega untuk tabel & panel
+   Dimuat PALING AKHIR (setelah peta-hud.css dan bg-video.css).
+   Masalah sebelumnya: panel kiri dikunci 340px, font tabel 10-11px,
+   kotak info bawah dibatasi 46% tinggi sehingga tabel terpotong.
+   ===================================================================== */
+
+/* ---------- Lebar panel (kiri & kanan terpisah) ---------- */
+.hud{
+  --hud-wl:clamp(360px,29vw,470px);   /* panel kiri (tabel & layer) */
+  --hud-wr:clamp(340px,26vw,430px);   /* panel kanan (gauge & grafik) */
+  --hud-w:var(--hud-wl);
+}
+.hud.lebar{--hud-wl:clamp(560px,46vw,780px)}      /* mode "Perlebar panel" */
+.hud-left{width:var(--hud-wl)!important;transition:width .3s ease,transform .35s ease,opacity .35s ease}
+.hud-right{width:var(--hud-wr)!important}
+.hud .leaflet-top.leaflet-left{left:calc(var(--hud-wl) + 30px)!important}
+.hud.panels-off .leaflet-top.leaflet-left{left:22px!important}
+.hud-info{
+  left:calc(var(--hud-wl) + 34px)!important;
+  right:calc(var(--hud-wr) + 34px)!important;
+  max-height:min(64vh,620px)!important;
+  font-size:13.5px;line-height:1.6;
+  padding:16px 20px!important;
+}
+.hud.panels-off .hud-info{left:24px!important;right:24px!important}
+/* mode lebar: kotak info boleh menutupi sebagian panel kanan supaya tidak terjepit (tutup dengan tombol x) */
+@media(min-width:901px){.hud.lebar .hud-info{right:24px!important;z-index:560;background:rgba(var(--space-cadet-rgb),.97)!important}}
+
+/* tombol perlebar panel (dibuat oleh peta_hud.js) */
+.hud-box .hud-lebar{
+  position:absolute;right:42px;top:8px;z-index:3;height:26px;padding:0 10px;display:inline-flex;align-items:center;gap:6px;
+  font:600 11.5px/1 'Inter',system-ui,sans-serif;color:var(--cream);cursor:pointer;
+  background:rgba(var(--cream-rgb),.1);border:1px solid rgba(var(--cream-rgb),.22);border-radius:999px;transition:.15s}
+.hud-box .hud-lebar:hover{background:rgba(var(--cream-rgb),.22)}
+.hud.lebar .hud-lebar{background:var(--acc,var(--tan));color:var(--space-cadet);border-color:transparent}
+.hud-box .hud-h{padding-right:120px!important}   /* beri ruang untuk 2 tombol */
+
+/* ---------- Area gulir panel kiri ---------- */
+.hud-scroll{padding-right:6px!important}
+.hud-left .hud-box:first-child{padding-bottom:14px!important}
+
+/* ---------- Teks & tabel di dalam panel: ukuran nyaman dibaca ---------- */
+.hud .card{font-size:13.5px;line-height:1.55;padding:16px!important}
+.hud .card>b{font-size:14.5px!important}
+.hud .text-xs{font-size:12.5px!important;line-height:1.55}
+.hud .text-sm{font-size:13.5px!important}
+
+.hud .table-wrap{
+  margin-top:10px;max-height:min(52vh,480px);overflow:auto!important;
+  border:1px solid rgba(var(--cream-rgb),.14)!important;border-radius:12px;
+  scrollbar-width:thin;scrollbar-color:rgba(var(--cream-rgb),.3) transparent}
+.hud table{font-size:13.5px!important;border-collapse:separate;border-spacing:0;table-layout:auto}
+.hud table.text-xs,.hud table.text-sm{font-size:13.5px!important}
+.hud th{
+  position:sticky;top:0;z-index:1;text-align:left;white-space:nowrap;
+  font-size:11.5px!important;font-weight:700;letter-spacing:.05em;
+  padding:10px 12px!important;background:var(--space-cadet)!important;color:var(--cream)!important}
+.hud td{padding:10px 12px!important;vertical-align:top;line-height:1.5;overflow-wrap:anywhere}
+.hud tbody tr:nth-child(even) td{background:rgba(var(--cream-rgb),.04)}
+.hud tbody tr:hover td{background:rgba(var(--tan-rgb),.12)}
+.hud td:last-child,.hud th:last-child{text-align:right}
+.hud td b{color:var(--cream)}
+
+/* tabel ringkasan 2 kolom (label : nilai) - BMKG, asumsi */
+.hud #bmkgIsi table td:first-child,
+.hud [data-panel=asumsi] table td:first-child{width:42%;color:var(--hud-m,var(--cream));font-weight:500}
+.hud #bmkgIsi table td:last-child,
+.hud [data-panel=asumsi] table td:last-child{text-align:left}
+.hud [data-panel=asumsi] table td:last-child{text-align:right}
+
+/* tabel Windy */
+.hud .windy-tbl{max-height:min(46vh,420px)}
+.hud #wTbl td{white-space:nowrap}
+.hud #wTbl td:nth-child(2){white-space:normal;min-width:130px}
+.hud #wTbl td:first-child{width:36px;color:var(--hud-m,var(--cream))}
+.hud #wTbl .bar{height:5px;margin-top:5px;border-radius:3px;background:rgba(var(--cream-rgb),.1);overflow:hidden}
+.hud #wTbl .bar i{display:block;height:100%}
+
+/* tabel skor sensitivitas */
+.hud [data-panel=mca] table td:nth-child(2){white-space:nowrap}
+
+/* slider bobot MCA lebih mudah dipegang */
+.hud #sliders>div{padding:4px 0}
+.hud input[type=range]{height:22px}
+.hud #sliders .flex{font-size:13.5px}
+
+/* legenda lebih besar */
+.hud #legenda,.hud .legenda-list{font-size:13px!important}
+.hud .legenda-list>div{display:flex;align-items:center;gap:8px;padding:2px 0}
+
+/* ---------- Kotak info bawah (hasil klik peta) ---------- */
+.hud-info{overflow:auto;scrollbar-width:thin;scrollbar-color:rgba(var(--cream-rgb),.3) transparent}
+.hud-info table,#hasilKlik table,#bandingkan table{font-size:13.5px!important;width:100%;border-collapse:collapse}
+.hud-info td,.hud-info th,#hasilKlik td,#hasilKlik th,#bandingkan td,#bandingkan th{padding:9px 12px!important;text-align:left!important;vertical-align:top}
+.hud-info td:not(:first-child),#hasilKlik td:not(:first-child){text-align:right!important}
+.hud-info tbody tr:nth-child(even) td{background:rgba(var(--cream-rgb),.04)}
+.hud-info .hud-insight{font-size:14px}
+.hud-info .hud-det{font-size:13px}
+#hasilKlik{font-size:13.5px}
+
+/* ---------- Panel kanan: grafik lebih tinggi & terbaca ---------- */
+.hud-right .hud-stats>div{padding:9px 8px;font-size:13.5px}
+.hud-right .hud-cards3 b{font-size:21px}
+.hud-right .hud-cards3 span{font-size:11px}
+.hud-box canvas{min-height:150px}
+
+/* ---------- Layar pendek (laptop 768px) ---------- */
+@media(max-height:820px){
+  .hud-left .hud-box:first-child .hud-chips{display:none}   /* ruang untuk tabel */
+  .hud .table-wrap{max-height:min(44vh,360px)}
+}
+
+/* ---------- Layar kecil: panel penuh lebar ---------- */
+@media(max-width:900px){
+  .hud{--hud-wl:auto;--hud-wr:auto}
+  .hud-left,.hud-right{width:auto!important}
+  .hud-box .hud-lebar{display:none}
+  .hud-box .hud-h{padding-right:34px!important}
+  .hud-info{left:10px!important;right:10px!important;max-height:58vh!important}
+  .hud .table-wrap{max-height:48vh}
+}

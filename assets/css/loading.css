@@ -1,0 +1,81 @@
+/* ECO-WAVE: transisi halaman "Ocean Wave" - gelombang menyapu layar, logo di tengah, gelembung & partikel energi.
+   Semua warna memakai variabel tema (--space-cadet, --slate-gray, --tan, --cream) sehingga mengikuti tema/palet aktif. */
+#pageLoader{--pw-h:120px;--pw-in:.6s;--pw-out:.8s;position:fixed;inset:0;z-index:2147483000;overflow:hidden;pointer-events:none;visibility:hidden;contain:layout paint}
+html.pl-boot #pageLoader,#pageLoader.pw-in,#pageLoader.pw-out{visibility:visible;pointer-events:auto}
+#pageLoader.pw-out{pointer-events:none}
+
+.pw-sheet{position:absolute;left:0;right:0;top:0;height:100%;background:var(--space-cadet);will-change:transform;transform:translate3d(0,0,0)}
+/* animasi masuk: gelombang naik dari bawah. Halaman baru melanjutkan dari titik terakhir lewat delay negatif (--pw-e). */
+html.pl-boot #pageLoader .pw-sheet,#pageLoader.pw-in .pw-sheet{animation:pwIn var(--pw-in) cubic-bezier(.55,.05,.3,1) calc(var(--pw-e,0ms) * -1) backwards}
+#pageLoader.pw-out .pw-sheet{transform:translate3d(0,calc(-100% - var(--pw-h)),0);animation:pwOut var(--pw-out) cubic-bezier(.6,.02,.3,1) backwards}
+@keyframes pwIn{from{transform:translate3d(0,calc(100% + var(--pw-h)),0)}to{transform:translate3d(0,0,0)}}
+@keyframes pwOut{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,calc(-100% - var(--pw-h)),0)}}
+
+/* tepi gelombang (atas = depan sapuan, bawah = ekor saat membuka) */
+.pw-crest{position:absolute;left:0;width:100%;height:var(--pw-h);overflow:hidden;pointer-events:none}
+.pw-top{bottom:calc(100% - 1px)}
+.pw-bot{top:calc(100% - 1px);transform:scaleY(-1)}
+.pw-w{position:absolute;left:0;bottom:0;width:200%;height:100%;fill:var(--space-cadet);will-change:transform;animation:pwGeser 2.4s linear infinite}
+.pw-w1{fill:var(--slate-gray);opacity:.55;height:88%;animation-duration:3.6s;animation-direction:reverse}
+@keyframes pwGeser{to{transform:translate3d(-50%,0,0)}}
+
+.pw-body{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(42% 38% at 50% 44%,rgba(var(--slate-gray-rgb),.22),transparent 72%)}
+.pw-logo{display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--cream)}
+html.pl-boot .pw-logo,#pageLoader.pw-in .pw-logo{animation:pwLogo .45s cubic-bezier(.2,.7,.2,1) calc(.1s - var(--pw-e,0ms)) backwards}
+#pageLoader.pw-out .pw-logo{opacity:0;transition:opacity .2s ease}
+@keyframes pwLogo{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+.pw-mark{position:relative;width:132px;height:132px;margin-bottom:6px}
+.pw-sv{display:block;overflow:visible}
+.pw-sv .lg-orb{fill:none;stroke:#fff;stroke-opacity:.9;stroke-width:5;stroke-linecap:round;stroke-dasharray:.14 .86;transform-box:view-box;transform-origin:50% 50%;animation:pwPutar 2.4s linear infinite}
+@keyframes pwPutar{to{transform:rotate(360deg)}}
+.pw-sv .eg-star{transform-box:fill-box;transform-origin:center;animation:pwKilau 1.6s ease-in-out infinite alternate}
+@keyframes pwKilau{from{transform:scale(.88);opacity:.85}to{transform:scale(1.08);opacity:1}}
+/* logo terbentuk: lengkung atas -> badan logo (8 irisan menyapu searah jarum jam) -> petir menyambar.
+   HANYA opacity & transform (jalur GPU): tetap halus walau thread utama sibuk memuat halaman. Tanpa mask/clip-path/filter beranimasi. */
+.pw-l{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;will-change:opacity,transform;background:var(--cream);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.pw-busur{--m:url(../brand/pw-busur.png)}.pw-badan{--m:url(../brand/pw-badan.png)}.pw-petir{--m:url(../brand/pw-petir.png)}
+.pw-mark::before{content:'';position:absolute;inset:-22%;background:radial-gradient(closest-side,rgba(var(--cream-rgb),.2),transparent);pointer-events:none}
+.pw-sp{opacity:0;-webkit-mask:url(../brand/pw-badan.png) center/contain no-repeat,conic-gradient(from var(--a),#000 0 45deg,transparent 45deg) center/100% 100% no-repeat;-webkit-mask-composite:source-in;mask:url(../brand/pw-badan.png) center/contain no-repeat,conic-gradient(from var(--a),#000 0 45deg,transparent 45deg) center/100% 100% no-repeat;mask-composite:intersect}
+.pw-sp1{--a:200deg;--t:.40s}.pw-sp2{--a:245deg;--t:.50s}.pw-sp3{--a:290deg;--t:.60s}.pw-sp4{--a:335deg;--t:.70s}
+.pw-sp5{--a:20deg;--t:.80s}.pw-sp6{--a:65deg;--t:.90s}.pw-sp7{--a:110deg;--t:1.00s}.pw-sp8{--a:155deg;--t:1.10s}
+html.pl-boot #pageLoader .pw-busur,#pageLoader.pw-in .pw-busur{animation:pwBusur .4s cubic-bezier(.3,.7,.2,1) calc(.25s - var(--pw-e,0ms)) backwards}
+html.pl-boot #pageLoader .pw-sp,#pageLoader.pw-in .pw-sp{animation:pwSp .28s ease-out calc(var(--t) - var(--pw-e,0ms)) both,pwSirna .01s linear calc(1.42s - var(--pw-e,0ms)) forwards}
+html.pl-boot #pageLoader .pw-badan,#pageLoader.pw-in .pw-badan{animation:pwMuncul .01s linear calc(1.42s - var(--pw-e,0ms)) both}
+html.pl-boot #pageLoader .pw-petir,#pageLoader.pw-in .pw-petir{animation:pwZap .5s ease-out calc(1.3s - var(--pw-e,0ms)) backwards}
+html.pl-boot #pageLoader .pw-mark::before,#pageLoader.pw-in .pw-mark::before{animation:pwMuncul .7s ease-out calc(.4s - var(--pw-e,0ms)) backwards}
+@keyframes pwBusur{from{opacity:0;transform:translate3d(-10px,5px,0)}to{opacity:1;transform:none}}
+@keyframes pwSp{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes pwSirna{from{opacity:1}to{opacity:0}}
+@keyframes pwMuncul{from{opacity:0}to{opacity:1}}
+@keyframes pwZap{0%{opacity:0;transform:translate3d(0,-6px,0)}30%{opacity:1;transform:none}45%{opacity:.25}60%{opacity:1}75%{opacity:.55}100%{opacity:1}}
+
+.pw-name{font:600 19px/1 'Inter',system-ui,sans-serif;letter-spacing:.34em;margin-right:-.34em;text-transform:uppercase;color:var(--cream)}
+.pw-sub{font:500 10.5px/1 'Inter',system-ui,sans-serif;letter-spacing:.38em;margin-right:-.38em;text-transform:uppercase;color:var(--tan);opacity:.9}
+.pw-line{position:relative;display:block;width:132px;height:2px;margin-top:10px;border-radius:2px;background:rgba(var(--cream-rgb),.14);overflow:hidden}
+.pw-line i{position:absolute;inset:0;width:42%;border-radius:2px;background:linear-gradient(90deg,transparent,var(--tan),var(--cream),transparent);animation:pwMuat 1.3s ease-in-out infinite}
+@keyframes pwMuat{from{transform:translateX(-110%)}to{transform:translateX(250%)}}
+
+/* hemat tenaga: animasi berhenti saat pemuat tersembunyi */
+html:not(.pl-boot) #pageLoader:not(.pw-in):not(.pw-out) *{animation-play-state:paused}
+html.pl-boot #pageLoader:not(.pw-out) *{animation-play-state:running}
+
+@media(max-width:600px){#pageLoader{--pw-h:84px}.pw-mark{width:108px;height:108px}.pw-name{font-size:16px}}
+/* pengurangan gerak (juga opsi "Hentikan animasi" di panel Aksesibilitas): tanpa sapuan, hanya pudar halus */
+@media(prefers-reduced-motion:reduce){
+  .pw-crest{display:none}
+  html.pl-boot #pageLoader .pw-sheet,#pageLoader.pw-in .pw-sheet{animation:pwPudarMasuk .2s ease backwards}
+  #pageLoader.pw-out .pw-sheet{transform:none;opacity:0;animation:pwPudarKeluar .25s ease backwards}
+  @keyframes pwPudarMasuk{from{opacity:0}to{opacity:1}}
+  @keyframes pwPudarKeluar{from{opacity:1}to{opacity:0}}
+  .pw-sv .lg-orb,.pw-sv .eg-star,.pw-line i,.pw-l{animation:none!important}
+}
+html.a11y-gerak .pw-crest{display:none}
+html.a11y-gerak #pageLoader.pw-out .pw-sheet{transform:none;opacity:0}
+html.a11y-gerak .pw-sv .lg-orb{display:none}
+html.a11y-gerak .pw-sv .eg-star,html.a11y-gerak .pw-line i,html.a11y-gerak .pw-l{animation:none!important}
+html.pl-boot{background:var(--space-cadet)}
+
+/* token warna neon (dipakai berkas lain) dan logo navbar / modal login */
+:root{--neon:#2f8dff;--neon-rgb:47,141,255;--neon-inti:#cdeeff;--neon-cyan:#5fe4ff;--neon-ungu:#8a6dff}
+.lm-logo{display:block;margin:0 auto 10px}
+.nv-logo{border-radius:0}

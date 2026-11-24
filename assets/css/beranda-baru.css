@@ -1,0 +1,234 @@
+/* ECO-WAVE - tampilan Beranda yang lebih modern (dimuat paling akhir, hanya halaman Beranda).
+   Hanya memakai variabel palet. Hero: pencarian kaca, tombol pil, tiga kartu angka. Jendela "browser": gaya dasbor kartu lembut. */
+body[data-page=beranda]{--serif:'Fraunces','Cormorant Garamond',Georgia,'Times New Roman',serif}
+
+/* ---------- HERO ---------- */
+body[data-page=beranda] #beranda .hero-copy .hero-cari{
+  width:min(560px,100%)!important;max-width:560px!important;height:58px;padding:0 10px 0 22px!important;gap:14px!important;
+  border-radius:999px!important;background:rgba(var(--cream-rgb),.14)!important;border:1px solid rgba(var(--cream-rgb),.32)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.3)!important;backdrop-filter:blur(18px) saturate(1.3)!important;
+  box-shadow:0 14px 40px rgba(var(--space-cadet-rgb),.35),inset 0 1px 0 rgba(var(--cream-rgb),.28)!important;cursor:text}
+body[data-page=beranda] #beranda .hero-copy .hero-cari:hover{background:rgba(var(--cream-rgb),.2)!important;border-color:rgba(var(--tan-rgb),.7)!important;transform:none}
+body[data-page=beranda] #beranda .hero-copy .hero-cari *{color:var(--cream)!important}
+body[data-page=beranda] #beranda .hero-copy .hero-cari i{color:var(--tan)!important;font-size:17px}
+body[data-page=beranda] #beranda .hero-copy .hero-cari span{font-size:14px;opacity:.92;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-page=beranda] #beranda .hero-copy .hero-cari kbd{flex:none;width:38px;height:38px;display:grid;place-items:center;padding:0;border-radius:50%;
+  background:rgba(var(--cream-rgb),.16)!important;border:1px solid rgba(var(--cream-rgb),.3)!important;font-size:13px}
+
+body[data-page=beranda] #beranda .hero-copy .btns{display:flex!important;gap:12px!important;justify-content:center!important;flex-wrap:wrap}
+body[data-page=beranda] #beranda .hero-copy .btn,body[data-page=beranda] #beranda .hero-copy .btn2{
+  display:inline-flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;min-width:0!important;
+  height:56px;padding:0 9px 0 26px!important;border-radius:999px!important;font:600 14.5px/1 'Inter',sans-serif!important;
+  letter-spacing:0!important;text-transform:none!important;text-decoration:none!important;transition:transform .2s,box-shadow .2s,background .2s!important}
+body[data-page=beranda] #beranda .hero-copy .btn{background:var(--tan)!important;color:var(--space-cadet)!important;border:0!important;box-shadow:0 12px 30px rgba(var(--space-cadet-rgb),.35)!important}
+body[data-page=beranda] #beranda .hero-copy .btn2{background:rgba(var(--cream-rgb),.14)!important;color:var(--cream)!important;border:1px solid rgba(var(--cream-rgb),.34)!important;
+  -webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important;box-shadow:inset 0 1px 0 rgba(var(--cream-rgb),.25)!important}
+body[data-page=beranda] #beranda .hero-copy .btn:hover,body[data-page=beranda] #beranda .hero-copy .btn2:hover{transform:translateY(-2px)}
+body[data-page=beranda] #beranda .hero-copy .btn2:hover{background:rgba(var(--cream-rgb),.22)!important}
+body[data-page=beranda] #beranda .hero-copy .btn i,body[data-page=beranda] #beranda .hero-copy .btn2 i{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:15px;transition:transform .25s}
+body[data-page=beranda] #beranda .hero-copy .btn i{background:var(--space-cadet);color:var(--cream)}
+body[data-page=beranda] #beranda .hero-copy .btn2 i{background:rgba(var(--cream-rgb),.16);color:var(--cream)}
+body[data-page=beranda] #beranda .hero-copy .btn:hover i{transform:translate(2px,-2px)}
+
+/* tiga kartu angka (bukan satu pil lagi) */
+body[data-page=beranda] #beranda .hero-rail{
+  display:grid!important;grid-template-columns:repeat(3,1fr);gap:12px!important;position:absolute!important;left:50%!important;right:auto!important;top:auto!important;
+  bottom:112px!important;transform:translateX(-50%)!important;width:min(600px,calc(100% - 40px))!important;height:auto!important;padding:0!important;
+  background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+body[data-page=beranda] #beranda .hero-rail div{
+  flex:none;display:flex;flex-direction:column-reverse;align-items:flex-start;gap:8px;text-align:left;padding:16px 18px!important;border:1px solid rgba(var(--cream-rgb),.26)!important;
+  border-radius:24px;background:rgba(var(--cream-rgb),.13);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
+  box-shadow:0 14px 34px rgba(var(--space-cadet-rgb),.28),inset 0 1px 0 rgba(var(--cream-rgb),.25)}
+body[data-page=beranda] #beranda .hero-rail div b{font:400 2rem/1 var(--serif)!important;letter-spacing:-.02em;color:var(--cream)!important;text-shadow:none!important}
+body[data-page=beranda] #beranda .hero-rail div span{margin:0!important;font:600 10.5px/1.3 'Inter',sans-serif!important;letter-spacing:.16em;text-transform:uppercase;color:var(--tan)!important;text-shadow:none!important}
+
+/* ---------- JENDELA "BROWSER" (pantauan langsung) ---------- */
+body[data-page=beranda] #langsung .live-win{position:relative;background:var(--cream);border-radius:30px;overflow:hidden;box-shadow:0 40px 90px rgba(var(--space-cadet-rgb),.5)}
+body[data-page=beranda] #langsung .live-win,body[data-page=beranda] #langsung .live-win *{text-shadow:none!important}
+.lw-bar{display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--cream);border-bottom:1px solid rgba(var(--slate-gray-rgb),.22);color:var(--slate-gray)}
+.lw-dots{display:flex;gap:8px;flex:none}
+.lw-dots i{width:12px;height:12px;border-radius:50%;background:var(--caput-mortuum)}
+.lw-dots i:nth-child(2){background:var(--tan)}.lw-dots i:nth-child(3){background:var(--slate-gray)}
+.lw-nav,.lw-act{display:flex;align-items:center;gap:16px;font-size:15px;flex:none}
+.lw-url{flex:1;max-width:520px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:10px;height:34px;padding:0 14px;border-radius:10px;
+  background:rgba(var(--slate-gray-rgb),.14);font-size:12.5px;color:var(--space-cadet)}
+.lw-url b{font-weight:500}.lw-url i:first-child{font-size:12px}.lw-url i:last-child{margin-left:auto;font-size:12px;opacity:.7}
+.lw-body{display:block;padding:18px;background:rgba(var(--slate-gray-rgb),.16)}
+
+body[data-page=beranda] #langsung .live-win .live-grid{
+  display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-template-areas:"a b c" "a d d";gap:18px!important;padding:0!important;background:none!important;box-shadow:none!important;border-radius:0;position:static;align-items:stretch}
+body[data-page=beranda] #langsung .live-win .live-grid::before,body[data-page=beranda] #langsung .live-win .live-grid::after{content:none!important;display:none!important}
+#lvBmkg{grid-area:a}#lvParam{grid-area:b}#lvTerakhir{grid-area:c}#lvTop{grid-area:d}
+body[data-page=beranda] #langsung .live-win .live-card{
+  background:var(--cream)!important;border:0!important;border-top:0!important;border-radius:30px!important;padding:26px 28px!important;box-shadow:0 1px 0 rgba(var(--space-cadet-rgb),.04)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;transform:none!important;text-align:left;min-width:0}
+body[data-page=beranda] #langsung .live-win .live-card:hover{transform:none!important;box-shadow:0 12px 34px rgba(var(--space-cadet-rgb),.1)!important}
+body[data-page=beranda] #langsung .live-win .live-card,body[data-page=beranda] #langsung .live-win .live-card *{color:var(--space-cadet)!important}
+body[data-page=beranda] #langsung .live-win .live-card h3{
+  display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 18px;font:400 1.3rem/1.2 var(--serif)!important;letter-spacing:-.01em}
+body[data-page=beranda] #langsung .live-win .live-card h3 i.bi{font-size:1.05rem;opacity:.75}
+body[data-page=beranda] #langsung .live-win .live-card h3 .lv-stat{margin-left:auto;font:600 10px/1.5 'Inter',sans-serif!important;letter-spacing:.1em;padding:3px 10px;border-radius:999px;
+  background:rgba(var(--slate-gray-rgb),.16);color:var(--space-cadet)!important}
+body[data-page=beranda] #langsung .live-win .live-card h3 .lv-stat.ok{background:rgba(var(--tan-rgb),.45)}
+body[data-page=beranda] #langsung .live-win .live-card h3 .lv-stat.bad{background:rgba(var(--caput-mortuum-rgb),.14);color:var(--caput-mortuum)!important}
+body[data-page=beranda] #langsung .live-win .lv-body{font:400 13px/1.65 'Inter',sans-serif;color:var(--space-cadet)}
+body[data-page=beranda] #langsung .live-win .lv-big{font:400 2.9rem/1 var(--serif)!important;letter-spacing:-.03em;margin:2px 0 6px}
+body[data-page=beranda] #langsung .live-win .lv-big small{font:500 .85rem/1 'Inter',sans-serif!important;color:var(--slate-gray)!important;letter-spacing:0}
+body[data-page=beranda] #langsung .live-win .lv-row{padding:9px 0;border-top:1px solid rgba(var(--slate-gray-rgb),.22)}
+body[data-page=beranda] #langsung .live-win .lv-row span,body[data-page=beranda] #langsung .live-win .lv-note{color:var(--slate-gray)!important}
+body[data-page=beranda] #langsung .live-win .lv-row b{font-weight:600}
+body[data-page=beranda] #langsung .live-win .lv-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font:600 11.5px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--caput-mortuum)!important;text-decoration:none}
+body[data-page=beranda] #langsung .live-win .lv-top li{padding:10px 0;border-top:1px solid rgba(var(--slate-gray-rgb),.22);gap:12px}
+body[data-page=beranda] #langsung .live-win .lv-top li>span:first-child{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(var(--slate-gray-rgb),.16);font-size:12px;font-weight:600}
+body[data-page=beranda] #langsung .live-win .lv-top em{padding:3px 12px;border-radius:999px;font:600 12px/1.4 'Inter',sans-serif!important;background:var(--tan)!important;color:var(--space-cadet)!important}
+body[data-page=beranda] #langsung .live-win .lv-spark{margin:10px 0 4px}
+
+@media(max-width:1000px){
+  body[data-page=beranda] #langsung .live-win .live-grid{grid-template-columns:1fr 1fr;grid-template-areas:"a a" "b c" "d d"}
+  .lw-nav,.lw-act{display:none}.lw-url{max-width:none}
+}
+@media(max-width:700px){
+  .lw-body{padding:12px}
+      body[data-page=beranda] #langsung .live-win .live-grid{grid-template-columns:1fr;grid-template-areas:"a" "b" "c" "d"}
+  body[data-page=beranda] #langsung .live-win .live-card{padding:22px 20px!important}
+  body[data-page=beranda] #beranda .hero-rail{width:calc(100% - 28px)!important;gap:8px!important;bottom:96px!important}
+  body[data-page=beranda] #beranda .hero-rail div{padding:12px 12px!important;border-radius:18px}
+  body[data-page=beranda] #beranda .hero-rail div b{font-size:1.45rem!important}
+  body[data-page=beranda] #beranda .hero-rail div span{font-size:9px!important;letter-spacing:.1em}
+  body[data-page=beranda] #beranda .hero-copy .btn,body[data-page=beranda] #beranda .hero-copy .btn2{width:100%;max-width:340px}
+}
+@media(prefers-reduced-motion:reduce){body[data-page=beranda] #beranda .hero-copy .btn,body[data-page=beranda] #beranda .hero-copy .btn2{transition:none!important}}
+/* Pantauan langsung mulai tepat di bawah hero (tidak menyembul di tampilan awal) */
+body[data-page=beranda] #langsung{margin-top:0!important;padding-top:88px!important}
+
+/* ---------- HERO dua kolom (layar lebar): teks rata kiri, kartu angka mengambang di kanan ---------- */
+@media(min-width:1000px){
+  body[data-page=beranda] #beranda .hero-stage{width:min(1240px,calc(100% - 64px))!important;margin:0 auto!important;justify-content:flex-start!important}
+  body[data-page=beranda] #beranda .hero-stage::before{content:"";position:absolute;z-index:-1;inset:-140px 38% -140px -220px;pointer-events:none;
+    background:radial-gradient(70% 70% at 40% 50%,rgba(var(--space-cadet-rgb),.62),transparent 72%)}
+  body[data-page=beranda] #beranda .hero-copy{width:min(660px,100%)!important;align-items:flex-start!important;text-align:left!important;margin:0!important}
+  body[data-page=beranda] #beranda .hero-copy h1{text-align:left!important;font-size:clamp(2.6rem,4.6vw,4.6rem)!important;line-height:1.04!important;letter-spacing:-.025em!important;text-transform:none!important;font-weight:600!important;margin:22px 0 0!important}
+  body[data-page=beranda] #beranda .hero-copy h1 .hl{font-family:var(--serif)!important;font-style:italic;font-weight:400;letter-spacing:-.01em}
+  body[data-page=beranda] #beranda .hero-copy .lead{text-align:left!important;max-width:520px!important;margin:22px 0 0!important;font-size:16px!important;line-height:1.75!important;opacity:.92}
+  body[data-page=beranda] #beranda .hero-copy .hero-cari{margin:30px 0 0!important}
+  body[data-page=beranda] #beranda .hero-copy .btns{justify-content:flex-start!important;margin-top:14px!important;width:auto}
+  body[data-page=beranda] #beranda .status-pill{align-self:flex-start}
+
+  body[data-page=beranda] #beranda .hero-rail{
+    display:flex!important;flex-direction:column;gap:16px!important;grid-template-columns:none;
+    left:auto!important;right:max(32px,calc((100% - 1240px)/2))!important;top:50%!important;bottom:auto!important;
+    transform:translateY(-46%)!important;width:304px!important}
+  body[data-page=beranda] #beranda .hero-rail div{flex-direction:row-reverse;justify-content:space-between;align-items:center;padding:22px 26px!important;border-radius:28px;gap:14px}
+  body[data-page=beranda] #beranda .hero-rail div:nth-child(2){transform:translateX(-34px)}
+  body[data-page=beranda] #beranda .hero-rail div b{font-size:2.3rem!important}
+  body[data-page=beranda] #beranda .hero-rail div span{max-width:7.5em}
+}
+@media(min-width:1000px){
+  html body[data-page=beranda] header#beranda .hero-stage{width:min(1240px,calc(100% - 64px))!important;max-width:none!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;padding:96px 0 150px!important;margin:0 auto!important}
+  html body[data-page=beranda] header#beranda .hero-copy{align-self:center!important;margin:0!important;width:min(740px,calc(100% - 340px))!important;max-width:none!important}
+  html body[data-page=beranda] header#beranda .hero-copy .status-pill{margin:0!important;align-self:flex-start!important}
+  html body[data-page=beranda] header#beranda .hero-copy h1{font-size:clamp(2.6rem,4vw,4.1rem)!important}
+  html body[data-page=beranda] header#beranda .hero-rail div:nth-child(2){transform:none!important}
+  html body[data-page=beranda] header#beranda .hero-copy .hero-cari,html body[data-page=beranda] header#beranda .hero-copy .btns{margin-left:0!important;margin-right:auto!important;align-self:flex-start!important}
+  html body[data-page=beranda] header#beranda .hero-rail{flex-direction:column!important;align-items:stretch!important}
+  html body[data-page=beranda] header#beranda .hero-rail div{display:flex!important;flex-direction:row-reverse!important;border:1px solid rgba(var(--cream-rgb),.16)!important}
+}
+@media(min-width:1000px) and (max-width:1199px){
+  body[data-page=beranda] #beranda .hero-copy{width:min(560px,100%)!important}
+  body[data-page=beranda] #beranda .hero-rail{width:250px!important}
+  body[data-page=beranda] #beranda .hero-rail div:nth-child(2){transform:translateX(-18px)}
+}
+
+/* ---------- KARTU BOBOT 40/30/15/15 (lebih ringan & modern) ---------- */
+body[data-page=beranda] #indGrid{counter-reset:krit;gap:18px!important}
+body[data-page=beranda] #indGrid .ind{
+  counter-increment:krit;position:relative;display:grid!important;grid-template-columns:1fr;align-content:start;text-align:left!important;
+  padding:28px 28px 26px!important;border-radius:28px!important;overflow:hidden;
+  background:linear-gradient(160deg,rgba(var(--cream-rgb),.11),rgba(var(--cream-rgb),.04) 55%,rgba(var(--space-cadet-rgb),.35))!important;
+  border:1px solid rgba(var(--cream-rgb),.16)!important;-webkit-backdrop-filter:blur(16px)!important;backdrop-filter:blur(16px)!important;
+  box-shadow:0 18px 44px rgba(var(--space-cadet-rgb),.28),inset 0 1px 0 rgba(var(--cream-rgb),.18)!important;transition:transform .3s,border-color .3s,box-shadow .3s}
+body[data-page=beranda] #indGrid .ind:hover{transform:translateY(-5px)!important;border-color:rgba(var(--tan-rgb),.5)!important;box-shadow:0 26px 56px rgba(var(--space-cadet-rgb),.38),inset 0 1px 0 rgba(var(--cream-rgb),.22)!important}
+body[data-page=beranda] #indGrid .ind::before{content:"0" counter(krit);position:absolute;top:24px;right:26px;font:600 11px/1 'Inter',sans-serif;letter-spacing:.18em;color:var(--tan);opacity:.85}
+body[data-page=beranda] #indGrid .ind::after{content:"";position:absolute;right:-60px;top:-60px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(var(--tan-rgb),.16),transparent 70%);pointer-events:none}
+body[data-page=beranda] #indGrid .ind .bw{display:contents}
+body[data-page=beranda] #indGrid .ind .bw b{order:1;display:block;width:auto;height:auto;margin:0 0 14px;border:0!important;border-radius:0;background:none!important;box-shadow:none!important;
+  font:300 3.6rem/1 var(--serif)!important;letter-spacing:-.04em;color:var(--cream)!important;text-align:left}
+body[data-page=beranda] #indGrid .ind .bar{order:2;height:4px!important;margin:0 0 20px!important;border-radius:4px;background:rgba(var(--cream-rgb),.14)}
+body[data-page=beranda] #indGrid .ind .bar i{border-radius:4px;background:linear-gradient(90deg,var(--slate-gray),var(--tan))!important}
+body[data-page=beranda] #indGrid .ind h3{order:3;margin:0 0 8px!important;font:500 1.2rem/1.25 var(--serif)!important;letter-spacing:-.005em;text-transform:none!important;color:var(--cream)!important;text-align:left}
+body[data-page=beranda] #indGrid .ind p{order:4;text-align:left!important;font-size:13.5px!important;line-height:1.7!important;color:var(--cream)!important;opacity:.78}
+
+/* layar laptop pendek: rapatkan hero agar tombol tetap terlihat tanpa scroll */
+@media(min-width:1000px) and (max-height:860px){
+  html body[data-page=beranda] header#beranda .hero-stage{padding:84px 0 70px!important}
+  html body[data-page=beranda] header#beranda .hero-copy{gap:16px!important}
+  html body[data-page=beranda] header#beranda .hero-copy h1{font-size:clamp(2.3rem,3.5vw,3.5rem)!important}
+  html body[data-page=beranda] header#beranda .hero-copy .lead{margin-top:6px!important;font-size:15px!important;line-height:1.65!important}
+  html body[data-page=beranda] header#beranda .hero-copy .hero-cari{margin-top:12px!important}
+  html body[data-page=beranda] header#beranda .hero-rail{top:46%!important;gap:12px!important}
+  html body[data-page=beranda] header#beranda .hero-rail div{padding:16px 24px!important}
+}
+
+/* naikkan isi hero: tumpuan stage sudah tepat di bawah navbar, jadi tanpa padding atas besar */
+@media(min-width:1000px){
+  html body[data-page=beranda] header#beranda .hero-stage{align-items:flex-start!important;padding:30px 0 56px!important}
+  html body[data-page=beranda] header#beranda .hero-copy{align-self:flex-start!important;gap:14px!important}
+  html body[data-page=beranda] header#beranda .hero-copy .lead{margin-top:2px!important}
+  html body[data-page=beranda] header#beranda .hero-copy .hero-cari{margin-top:18px!important}
+  html body[data-page=beranda] header#beranda .hero-rail{top:320px!important;transform:none!important}
+}
+@media(min-width:1000px) and (max-height:860px){
+  html body[data-page=beranda] header#beranda .hero-rail{top:254px!important}
+}
+
+/* ---------- KARTU RINGKASAN HERO (v19) ----------
+   Kartu kaca utuh (tanpa lekukan yang memotong garis tepi), tombol panah sungguhan di pojok kanan-atas,
+   dan seluruh kartu bisa diklik (tautan .hr-go menutupi kartu). Label diberi ruang agar tidak menabrak panah. */
+html body[data-page=beranda] header#beranda.hero .hero-rail{pointer-events:auto!important}
+html body[data-page=beranda] header#beranda.hero .hero-rail>div{position:relative!important;isolation:isolate}
+html body[data-page=beranda] header#beranda.hero .hero-rail .hr-go{position:absolute!important;inset:0;z-index:3;border-radius:inherit;color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+html body[data-page=beranda] header#beranda.hero .hero-rail .hr-go:focus-visible{outline:2px solid var(--tan);outline-offset:3px}
+html body[data-page=beranda] header#beranda.hero .hero-rail .hr-go u{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+html body[data-page=beranda] header#beranda.hero .hero-rail .hr-go .hr-ic{display:none}
+html body[data-page=beranda] header#beranda.hero .hero-rail div b em{font-style:normal;font:inherit}
+html body[data-page=beranda] header#beranda.hero .hero-rail div b small{display:block;margin-top:4px;font:600 9.5px/1.2 'Inter',sans-serif!important;letter-spacing:.04em;color:var(--tan)!important;opacity:.95;text-transform:none}
+
+@media(min-width:1000px){
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail{gap:14px!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div{width:clamp(168px,13.4vw,196px)!important;min-height:132px!important;padding:18px 20px!important;gap:16px!important;transition:transform .25s ease}
+  /* kaca kartu: garis tepi utuh, tanpa mask lekukan */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div::before{-webkit-mask:none!important;mask:none!important;border-radius:22px!important;
+    background:linear-gradient(160deg,rgba(var(--cream-rgb),.17),rgba(var(--space-cadet-rgb),.46))!important;border:1px solid rgba(var(--cream-rgb),.24)!important;
+    box-shadow:0 18px 40px rgba(var(--space-cadet-rgb),.28),inset 0 1px 0 rgba(var(--cream-rgb),.18);transition:border-color .25s,background .25s}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div::after{content:none!important;display:none!important}
+  /* tombol panah: elemen sungguhan di dalam kartu */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail .hr-go .hr-ic{display:block;box-sizing:border-box;padding:8px;place-items:center;position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;
+    color:var(--cream);background:rgba(var(--cream-rgb),.12);border:1px solid rgba(var(--cream-rgb),.3);transition:background .25s,color .25s,border-color .25s,transform .25s}
+  /* label: sisakan ruang untuk panah, boleh dua baris */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div>span{padding-right:38px;line-height:1.35!important;min-height:2.7em;font-size:10px!important;letter-spacing:.1em!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div b{line-height:1!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail div b small{font-size:11px!important;margin-top:7px}
+  /* hover / fokus */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div:hover,html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div:focus-within{transform:translateY(-4px)!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div:hover::before,html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div:focus-within::before{border-color:rgba(var(--tan-rgb),.6)!important;background:linear-gradient(160deg,rgba(var(--cream-rgb),.22),rgba(var(--space-cadet-rgb),.5))!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div:hover .hr-go .hr-ic,html body[data-page=beranda] header#beranda.hero.hero .hero-rail .hr-go:focus-visible .hr-ic{background:var(--tan);color:var(--space-cadet);border-color:var(--tan);transform:rotate(45deg)}
+  /* pil info di atas kartu ikut dijajarkan */
+  html body[data-page=beranda] header#beranda.hero.hero .hero-url{bottom:244px!important}
+}
+@media(min-width:1000px) and (max-width:1180px){
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div{width:146px!important;min-height:124px!important;padding:16px!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail>div>span{padding-right:34px;font-size:9.5px!important}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-rail .hr-go .hr-ic{width:28px;height:28px;top:10px;right:10px;padding:7px}
+  html body[data-page=beranda] header#beranda.hero.hero .hero-url{bottom:232px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html body[data-page=beranda] header#beranda.hero .hero-rail>div,html body[data-page=beranda] header#beranda.hero .hero-rail .hr-go .hr-ic{transition:none!important}
+}
+/* layar kecil: tiga kartu sama tinggi, nilai sejajar di bawah */
+@media(max-width:999px){
+  html body[data-page=beranda] header#beranda.hero .hero-rail{align-items:stretch!important}
+  html body[data-page=beranda] header#beranda.hero .hero-rail>div{display:flex!important;flex-direction:column!important;justify-content:space-between!important;gap:6px}
+  html body[data-page=beranda] header#beranda.hero .hero-rail>div>span{order:-1;min-height:2.6em;line-height:1.3!important}
+  html body[data-page=beranda] header#beranda.hero .hero-rail div b small{display:none}
+}

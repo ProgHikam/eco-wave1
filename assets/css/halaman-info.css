@@ -1,0 +1,78 @@
+/* Gaya bersama halaman informasi: teknologi.php (memakai token warna dari tema.css) */
+.info-wrap{max-width:78rem;margin:0 auto;padding:1.5rem 1rem 3.5rem}
+.info-toc{position:sticky;top:calc(var(--nav-h,64px) + 10px);z-index:20;display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;margin:0 0 1.6rem;
+  background:rgba(var(--space-cadet-rgb),.88);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid var(--o-line);border-radius:16px}
+.info-toc a{padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--cream);text-decoration:none;background:rgba(var(--cream-rgb),.06);white-space:nowrap}
+.info-toc a:hover{background:rgba(var(--tan-rgb),.14);color:var(--cream)}
+.info-sec{margin:0 0 2.6rem;scroll-margin-top:calc(var(--nav-h,64px) + 90px)}
+.info-sec>h2{font-size:1.5rem;font-weight:800;color:var(--cream);margin:0 0 .35rem;display:flex;align-items:center;gap:10px}
+.info-sec>h2 .no{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;font-size:14px;color:var(--space-cadet);background:var(--o-bolt-grad,var(--tan))}
+.info-sec>.lead{color:var(--o-mut);max-width:80ch;margin:0 0 1.1rem;font-size:15px;line-height:1.7}
+.info-sec h3{font-size:1.02rem;font-weight:800;color:var(--cream);margin:1.3rem 0 .5rem}
+.info-sec p,.info-sec li{line-height:1.7;color:var(--cream)}
+.info-sec ul,.info-sec ol{padding-left:1.25rem;margin:.4rem 0 .8rem}
+.info-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.info-card{padding:1.1rem 1.2rem;border:1px solid var(--o-line);border-radius:16px;background:var(--o-card)}
+.info-card h4{margin:0 0 .35rem;font-size:1rem;font-weight:800;color:var(--cream)}
+.info-card p{margin:.25rem 0;font-size:14px}
+.info-card .tag{display:inline-block;margin-bottom:.5rem;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:rgba(var(--tan-rgb),.12);color:var(--tan)}
+
+/* alur */
+.alur-info{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:.8rem 0 1rem}
+.alur-info .stp{flex:1 1 150px;position:relative;padding:14px 14px 12px;border:1px solid var(--o-line);border-radius:14px;background:var(--o-card)}
+.alur-info .stp b{display:block;color:var(--cream);font-size:14px;margin-bottom:3px}
+.alur-info .stp span{font-size:12.5px;color:var(--o-mut);line-height:1.5}
+.alur-info .stp i{font-style:normal;position:absolute;top:-10px;left:12px;font-size:11px;font-weight:800;padding:1px 9px;border-radius:999px;background:var(--o-bolt-grad,var(--tan));color:var(--space-cadet)}
+.alur-info .stp:not(:last-child)::after{content:"\2192";position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--tan);font-weight:800;z-index:2}
+@media(max-width:700px){.alur-info .stp:not(:last-child)::after{display:none}}
+
+/* rumus */
+.rumus{margin:.6rem 0 .9rem;padding:12px 16px;border-left:4px solid var(--tan);border-radius:0 12px 12px 0;background:rgba(var(--tan-rgb),.06);
+  font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;font-size:14px;line-height:1.8;color:var(--cream);overflow-x:auto;white-space:pre-wrap}
+.rumus small{display:block;font-family:inherit;font-size:12px;color:var(--o-mut);margin-top:2px}
+.contoh{margin:.6rem 0 1rem;padding:12px 16px;border:1px dashed rgba(var(--tan-rgb),.35);border-radius:12px;background:rgba(var(--tan-rgb),.05);font-size:14px;line-height:1.75}
+.contoh b.t{display:block;color:var(--tan);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+
+/* tabel */
+.info-scroll{overflow-x:auto;border:1px solid var(--o-line);border-radius:14px;margin:.6rem 0 1rem}
+.info-tbl{min-width:560px;font-size:13.5px;line-height:1.6}
+.info-tbl th{white-space:nowrap}
+.info-tbl td{vertical-align:top;color:var(--cream)}
+.info-tbl td:first-child{color:var(--cream);font-weight:700}
+.info-tbl code,.info-sec code{font-size:12.5px;color:var(--cream);background:rgba(var(--cream-rgb),.06);padding:1px 6px;border-radius:6px}
+.info-tbl.rata td:not(:first-child){text-align:center}
+
+/* kotak catatan */
+.tip,.warn,.good{margin:.8rem 0 1rem;padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.7}
+.tip{background:rgba(var(--tan-rgb),.06);border:1px solid rgba(var(--tan-rgb),.22);color:var(--cream)}
+.warn{background:rgba(var(--tan-rgb),.08);border:1px solid rgba(var(--tan-rgb),.4);color:var(--cream)}
+.good{background:rgba(var(--slate-gray-rgb),.08);border:1px solid rgba(var(--slate-gray-rgb),.4);color:var(--cream)}
+.tip b,.warn b,.good b{color:var(--cream)}
+
+.prioritas{counter-reset:p;list-style:none;padding:0!important}
+.prioritas li{counter-increment:p;position:relative;padding:10px 14px 10px 52px;margin:0 0 8px;border:1px solid var(--o-line);border-radius:12px;background:var(--o-card)}
+.prioritas li::before{content:counter(p);position:absolute;left:12px;top:9px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:var(--space-cadet);background:var(--o-bolt-grad,var(--tan))}
+
+
+/* ---- daftar fitur (teknologi.php) ---- */
+.fitur-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.fitur-card{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--o-line);border-radius:16px;background:var(--o-card);transition:border-color .2s,transform .2s}
+.fitur-card:hover{border-color:rgba(var(--tan-rgb),.4);transform:translateY(-2px)}
+.fitur-main{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream);padding:4px}
+.fitur-ic{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:12px;font-size:21px;color:var(--tan);background:rgba(var(--tan-rgb),.1);border:1px solid rgba(var(--tan-rgb),.24)}
+.fitur-tt{display:flex;flex-direction:column;min-width:0}
+.fitur-tt b{font-size:16px;font-weight:800;line-height:1.25}
+.fitur-tt small{font-size:12.5px;color:var(--o-mut)}
+.fitur-go{margin-left:auto;font-size:22px;color:var(--tan);opacity:.6;transition:transform .2s,opacity .2s}
+.fitur-main:hover .fitur-go{opacity:1;transform:translateX(3px)}
+.fitur-main:hover .fitur-tt b{text-decoration:underline;text-underline-offset:3px}
+.fitur-badge{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:rgba(var(--cream-rgb),.14);vertical-align:middle}
+.fitur-ds{margin:0;font-size:13.5px;line-height:1.6;color:var(--cream)}
+.fitur-sub{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.fitur-sub a{padding:5px 11px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.3;text-decoration:none;color:var(--cream);background:rgba(var(--cream-rgb),.07);border:1px solid rgba(var(--cream-rgb),.14);transition:background .15s,border-color .15s,color .15s}
+.fitur-sub a:hover{background:rgba(var(--tan-rgb),.13);border-color:rgba(var(--tan-rgb),.35);color:var(--cream)}
+.fitur-cat{margin:0;font-size:12px;line-height:1.5;color:var(--o-mut)}
+
+/* v7: tombol keyboard & chip aksi */
+.info-sec kbd{display:inline-block;padding:2px 7px;border-radius:6px;font:600 .82em/1.3 inherit;color:var(--cream);background:rgba(var(--cream-rgb),.1);border:1px solid rgba(var(--cream-rgb),.22);border-bottom-width:2px}
+.fitur-sub a[data-cari],.fitur-sub a[data-aks]{cursor:pointer}
