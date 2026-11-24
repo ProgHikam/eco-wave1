@@ -1,5 +1,7 @@
 config/config.local.php
-config/windy.php
-database_pengguna.sql
-assets/vendor/
 *.bak
+requirements.txt
+01_raw/
+03_arcgis/
+arsip/
+scripts/
